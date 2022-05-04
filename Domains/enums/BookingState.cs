@@ -1,4 +1,4 @@
-﻿namespace Entities.enums
+﻿namespace Domains.enums
 {
     public enum BookingState
     {
