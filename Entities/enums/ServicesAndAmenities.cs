@@ -1,6 +1,6 @@
 ﻿namespace Entities.enums
 {
-    internal enum ServicesAndAmenities
+    public enum ServicesAndAmenities
     {
         Безкоштовні_туалетно0косметичні_засоби = 0, Халат, Рушники, Капці, Фен,
         Білизна, Шафа, Мінібар, Кондиціонер, Сейф, Праска, Робочий_кабінет,

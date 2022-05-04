@@ -1,6 +1,6 @@
 ﻿namespace Entities.enums
 {
-    internal enum Gender
+    public enum Gender
     {
         Чоловіча = 0, Жіноча
     }

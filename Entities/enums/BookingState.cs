@@ -1,6 +1,6 @@
 ﻿namespace Entities.enums
 {
-    internal enum BookingState
+    public enum BookingState
     {
         Вільний, Заброньований, Зданий
     }

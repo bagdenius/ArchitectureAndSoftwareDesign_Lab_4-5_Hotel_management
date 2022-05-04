@@ -2,7 +2,7 @@
 
 namespace Entities
 {
-    internal class HotelEntity : IHotelEntity
+    public class HotelEntity : IHotelEntity
     {
         public int Id { get; set; }
         public List<RoomEntity> Rooms { get; set; }

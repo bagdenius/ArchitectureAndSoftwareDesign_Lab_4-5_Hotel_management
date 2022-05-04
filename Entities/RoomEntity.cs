@@ -3,7 +3,7 @@ using Entities.enums;
 
 namespace Entities
 {
-    internal class RoomEntity : IRoomEntity
+    public class RoomEntity : IRoomEntity
     {
         public int Id { get; set; }
         public string Number { get; set; }
