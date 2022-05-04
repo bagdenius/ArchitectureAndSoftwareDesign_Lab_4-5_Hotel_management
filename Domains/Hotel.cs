@@ -2,7 +2,7 @@
 
 namespace Domains
 {
-    public class Hotel : IHotel
+    public class Hotel
     {
         public int Id { get; set; }
         public List<Room> Rooms { get; set; }
