@@ -1,52 +1,54 @@
 ﻿using Database;
+using Entities;
 using Repositories;
+using Repositories.Abstract;
 using UoW.Abstract;
 
 namespace UoW
 {
     public class UnitOfWork : IUnitOfWork
     {
-        public UnitOfWork()
+        private readonly ApplicationDbContext _context;
+
+        public UnitOfWork(ApplicationDbContext context)
         {
-            _context = new ApplicationDbContext();
+            _context = context;
         }
 
-        private ApplicationDbContext _context;
-        private HotelsRepository _hotelsRepository;
-        private RoomsRepository _roomsRepository;
-        private CustomersRepository _customersRepository;
+        private IRepository<HotelEntity> _hotelsRepository;
+        private IRepository<RoomEntity> _roomsRepository;
+        private IRepository<CustomerEntity> _customersRepository;
 
-        public HotelsRepository Hotels
+        public IRepository<HotelEntity> HotelsRepository
         {
             get
             {
                 if (_hotelsRepository == null)
-                    _hotelsRepository = new HotelsRepository(_context);
+                    _hotelsRepository = new Repository<HotelEntity>(_context);
                 return _hotelsRepository;
             }
         }
 
-        public RoomsRepository Rooms
+        public IRepository<RoomEntity> RoomsRepository
         {
             get
             {
                 if (_roomsRepository == null)
-                    _roomsRepository = new RoomsRepository(_context);
+                    _roomsRepository = new Repository<RoomEntity>(_context);
                 return _roomsRepository;
             }
         }
-        
-        public CustomersRepository Customers
+
+        public IRepository<CustomerEntity> CustomersRepository
         {
             get
             {
                 if (_customersRepository == null)
-                    _customersRepository = new CustomersRepository(_context);
+                    _customersRepository = new Repository<CustomerEntity>(_context);
                 return _customersRepository;
             }
         }
 
-        // *TODO: Separate the implementation of methods from the use of repositories
         public void Save()
         {
             _context.SaveChanges();
@@ -54,14 +56,14 @@ namespace UoW
 
         private bool disposed = false;
 
-        public virtual void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if (!disposed)
             {
                 if (disposing)
                     _context.Dispose();
-                disposed = true;
             }
+            disposed = true;
         }
 
         public void Dispose()
