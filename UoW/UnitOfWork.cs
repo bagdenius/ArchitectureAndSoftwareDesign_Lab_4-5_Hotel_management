@@ -10,16 +10,16 @@ namespace UoW
     {
         private readonly ApplicationDbContext _context;
 
-        public UnitOfWork(ApplicationDbContext context)
+        public UnitOfWork()
         {
-            _context = context;
+            _context = new ApplicationDbContext();
         }
 
         private IRepository<HotelEntity> _hotelsRepository;
         private IRepository<RoomEntity> _roomsRepository;
         private IRepository<CustomerEntity> _customersRepository;
 
-        public IRepository<HotelEntity> HotelsRepository
+        public IRepository<HotelEntity> Hotels
         {
             get
             {
@@ -29,7 +29,7 @@ namespace UoW
             }
         }
 
-        public IRepository<RoomEntity> RoomsRepository
+        public IRepository<RoomEntity> Rooms
         {
             get
             {
@@ -39,7 +39,7 @@ namespace UoW
             }
         }
 
-        public IRepository<CustomerEntity> CustomersRepository
+        public IRepository<CustomerEntity> Customers
         {
             get
             {
