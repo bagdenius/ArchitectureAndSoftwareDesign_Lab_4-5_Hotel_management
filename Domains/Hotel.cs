@@ -3,6 +3,7 @@
 namespace Domains
 {
     public class Hotel : IHotel
+>>>>>>>>> Temporary merge branch 2
     {
         public int Id { get; set; }
         public List<Room> Rooms { get; set; }
