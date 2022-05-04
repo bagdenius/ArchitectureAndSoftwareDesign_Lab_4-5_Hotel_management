@@ -59,9 +59,7 @@ namespace UoW
             if (!disposed)
             {
                 if (disposing)
-                {
                     _context.Dispose();
-                }
                 disposed = true;
             }
         }

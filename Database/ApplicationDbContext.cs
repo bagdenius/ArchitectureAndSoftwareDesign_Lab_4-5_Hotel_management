@@ -5,6 +5,7 @@ namespace Database
 {
     public class ApplicationDbContext : DbContext
     {
+        // *Maybe it should be Singleton
         public ApplicationDbContext()
         {
             //Database.EnsureDeleted();
