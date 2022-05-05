@@ -35,8 +35,9 @@ namespace UI
                 Floor = 1,
                 Cost = 1000,
                 Area = 50,
-                RoomCategory = RoomCategory.Апартаменти,
-                ServicesAndAmenities = {}
+                roomCategory = RoomCategory.Апартаменти,
+                servicesAndAmenities = {},
+                bookingState = BookingState.Вільний
             });
             Update();
         }
