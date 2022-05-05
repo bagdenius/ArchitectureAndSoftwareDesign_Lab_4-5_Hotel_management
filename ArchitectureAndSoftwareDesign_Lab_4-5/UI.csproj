@@ -18,7 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DI\DI.csproj" />
+    <ProjectReference Include="..\API_Modules\API_Modules.csproj" />
+    <ProjectReference Include="..\Controllers\Controllers.csproj" />
+    <ProjectReference Include="..\DAL_Modules\DAL_Modules.csproj" />
+    <ProjectReference Include="..\DI\BLL_Modules.csproj" />
     <ProjectReference Include="..\Mappers\Mappers.csproj" />
     <ProjectReference Include="..\Models\Models.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />

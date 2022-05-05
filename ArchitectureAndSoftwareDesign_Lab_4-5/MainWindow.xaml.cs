@@ -1,13 +1,23 @@
-﻿using Models;
+﻿using Controllers.Abstract;
+using Models;
+using Models.enums;
 using System.Windows;
 
 namespace UI
 {
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private readonly IController<HotelModel> _hotelsController;
+        private readonly IController<RoomModel> _roomsController;
+        private readonly IController<CustomerModel> _customersController;
+        public MainWindow(IController<HotelModel> hotelsController, IController<RoomModel> roomsController,
+            IController<CustomerModel> customersController)
         {
             InitializeComponent();
+
+            _hotelsController = hotelsController;
+            _roomsController = roomsController;
+            _customersController = customersController;
             
             Update();
         }
@@ -19,15 +29,15 @@ namespace UI
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            //_service.Add(new RoomModel()
-            //{
-            //    Number = "101",
-            //    Floor = 1,
-            //    Cost = 1000,
-            //    Area = 50,
-            //    RoomCategory = RoomCategory.Апартаменти,
-            //    ServicesAndAmenities = ServicesAndAmenities.Капці.ToString()
-            //});
+            _roomsController.Add(new RoomModel()
+            {
+                Number = "101",
+                Floor = 1,
+                Cost = 1000,
+                Area = 50,
+                RoomCategory = RoomCategory.Апартаменти,
+                ServicesAndAmenities = {}
+            });
             Update();
         }
     }

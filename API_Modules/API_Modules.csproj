@@ -8,13 +8,10 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="6.3.0" />
-    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Mappers\Mappers.csproj" />
-    <ProjectReference Include="..\Services\Services.csproj" />
-    <ProjectReference Include="..\UoW\UoW.csproj" />
+    <ProjectReference Include="..\Controllers\Controllers.csproj" />
   </ItemGroup>
 
 </Project>

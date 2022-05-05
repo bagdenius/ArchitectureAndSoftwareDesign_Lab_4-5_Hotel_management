@@ -2,9 +2,9 @@
 using AutoMapper;
 using Mappers;
 
-namespace DI
+namespace BLL_Modules
 {
-    public class MappersModule : Module
+    public class MappingModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {

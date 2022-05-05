@@ -1,14 +1,8 @@
 ﻿using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using AutoMapper;
-using DI;
-using Domains;
-using Mappers;
-using UoW;
-using UoW.Abstract;
-using Services;
-using Services.Abstract;
+using BLL_Modules;
 using System.Windows;
+using DAL_Modules;
+using API_Modules;
 
 namespace UI
 {
@@ -18,11 +12,10 @@ namespace UI
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<MainWindow>().SingleInstance();
-            builder.RegisterType<RoomsService>().As<IService<Room>>();
-            builder.RegisterType<HotelsService>().As<IService<Hotel>>();
-            builder.RegisterType<CustomersService>().As<IService<Customer>>();            
-            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
-            builder.RegisterModule<MappersModule>();
+            builder.RegisterModule<ControllerModule>();
+            builder.RegisterModule<ServiceModule>();
+            builder.RegisterModule<UoWModule>();
+            builder.RegisterModule<MappingModule>();
 
             var container = builder.Build();
 
