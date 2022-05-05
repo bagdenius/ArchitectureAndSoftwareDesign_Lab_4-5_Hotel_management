@@ -1,12 +1,17 @@
-﻿<Window x:Class="ArchitectureAndSoftwareDesign_Lab_4_5.MainWindow"
+﻿<Window x:Class="UI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ArchitectureAndSoftwareDesign_Lab_4_5"
+        xmlns:local="clr-namespace:UI"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="AddButton" Content="Button" HorizontalAlignment="Left" Margin="13,306,0,0" VerticalAlignment="Top" Height="120" Width="208" Click="AddButton_Click"/>
+        <DataGrid x:Name="RoomsDataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Height="301" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

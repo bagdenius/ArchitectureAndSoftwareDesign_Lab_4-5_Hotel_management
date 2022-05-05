@@ -1,16 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <RootNamespace>ArchitectureAndSoftwareDesign_Lab_4_5</RootNamespace>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="..\.editorconfig" Link=".editorconfig" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="6.3.0" />
@@ -18,9 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DI\DI.csproj" />
     <ProjectReference Include="..\Mappers\Mappers.csproj" />
+    <ProjectReference Include="..\ServicesUoW\ServicesUoW.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />
+    <ProjectReference Include="..\UoW\RepositoriesUoW.csproj" />
   </ItemGroup>
 
 </Project>

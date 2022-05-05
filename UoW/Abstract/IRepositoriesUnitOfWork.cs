@@ -1,9 +1,9 @@
 ﻿using Entities;
 using Repositories.Abstract;
 
-namespace UoW.Abstract
+namespace RepositoriesUoW.Abstract
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IRepositoriesUnitOfWork : IDisposable
     {
         public IRepository<HotelEntity> Hotels { get; }
         public IRepository<RoomEntity> Rooms { get; }

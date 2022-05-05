@@ -4,12 +4,13 @@ namespace Services.Abstract
 {
     public interface IService<TDomain> where TDomain : class
     {
-        public void Add(TDomain entity);
-        public void Update(TDomain entity);
+        public void Add(TDomain domain);
+        public void Update(TDomain domain);
         public void Remove(int id);
-        public void Remove(TDomain entity);
+        public void Remove(TDomain domain);
         public TDomain GetById(int id);
-        public IEnumerable<TDomain> GetAll(
+        public List<TDomain> GetAll();
+        public List<TDomain> GetAll(
             Expression<Func<TDomain, bool>> filter = null,
             Func<IQueryable<TDomain>, IOrderedQueryable<TDomain>> orderBy = null,
             string includeProperties = "");

@@ -19,6 +19,7 @@ namespace Repositories
         public void Add(TEntity entity)
         {
             _dbSet.Add(entity);
+            _context.SaveChanges();
         }
 
         public void Update(TEntity entity)
@@ -47,7 +48,12 @@ namespace Repositories
             return _dbSet.Find(id);
         }
 
-        public IEnumerable<TEntity> GetAll(
+        public List<TEntity> GetAll()
+        {
+            return _dbSet.ToList();
+        }
+
+        public List<TEntity> GetAll(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "")

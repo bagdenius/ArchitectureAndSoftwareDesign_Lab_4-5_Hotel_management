@@ -2,15 +2,15 @@
 using Entities;
 using Repositories;
 using Repositories.Abstract;
-using UoW.Abstract;
+using RepositoriesUoW.Abstract;
 
-namespace UoW
+namespace RepositoriesUoW
 {
-    public class UnitOfWork : IUnitOfWork
+    public class RepositoriesUnitOfWork : IRepositoriesUnitOfWork
     {
         private readonly ApplicationDbContext _context;
 
-        public UnitOfWork()
+        public RepositoriesUnitOfWork()
         {
             _context = new ApplicationDbContext();
         }

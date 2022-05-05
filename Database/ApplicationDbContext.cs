@@ -8,8 +8,8 @@ namespace Database
         // *Maybe it should be Singleton
         public ApplicationDbContext()
         {
-            //Database.EnsureDeleted();
-            //Database.EnsureCreated();
+            Database.EnsureDeleted();
+            Database.EnsureCreated();
         }
         public DbSet<HotelEntity> Hotels { get; set; }
         public DbSet<RoomEntity> Rooms { get; set; }

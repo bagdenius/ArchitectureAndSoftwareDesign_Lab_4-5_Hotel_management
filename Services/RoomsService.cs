@@ -1,30 +1,31 @@
-﻿using Domains;
+﻿using AutoMapper;
+using Domains;
 using Entities;
-using Repositories.Abstract;
 using Services.Abstract;
 using System.Linq.Expressions;
-using UoW.Abstract;
+using RepositoriesUoW.Abstract;
 
 namespace Services
 {
     public class RoomsService : IService<Room>
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IRepositoriesUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public RoomsService(IUnitOfWork unitOfWork)
+        public RoomsService(IRepositoriesUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
-        private readonly IRepository<RoomEntity> _roomsRepository;
         public void Add(Room room)
         {
-            _unitOfWork.Rooms.Add(room);
+            _unitOfWork.Rooms.Add(_mapper.Map<RoomEntity>(room));
         }
 
         public void Update(Room room)
         {
-            _unitOfWork.Rooms.Update(room);
+            _unitOfWork.Rooms.Update(_mapper.Map<RoomEntity>(room));
         }
 
         public void Remove(int id)
@@ -34,20 +35,28 @@ namespace Services
 
         public void Remove(Room room)
         {
-            _unitOfWork.Rooms.Remove(room);
+            _unitOfWork.Rooms.Remove(_mapper.Map<RoomEntity>(room));
         }
 
         public Room GetById(int id)
         {
-            return _unitOfWork.Rooms.GetById(id);
+            return _mapper.Map<Room>(_unitOfWork.Rooms.GetById(id));
         }
 
-        public IEnumerable<Room> GetAll(
+        public List<Room> GetAll()
+        {
+            return _mapper.Map<List<Room>>(_unitOfWork.Rooms.GetAll());
+        }
+
+        public List<Room> GetAll(
             Expression<Func<Room, bool>> filter = null,
             Func<IQueryable<Room>, IOrderedQueryable<Room>> orderBy = null,
             string includeProperties = "")
         {
-            return _unitOfWork.Rooms.GetAll();
+            return _mapper.Map<List<Room>>(_unitOfWork.Rooms.GetAll(
+                _mapper.Map<Expression<Func<RoomEntity, bool>>>(filter),
+                _mapper.Map<Func<IQueryable<RoomEntity>, IOrderedQueryable<RoomEntity>>>(orderBy),
+                includeProperties));
         }
     }
 }
