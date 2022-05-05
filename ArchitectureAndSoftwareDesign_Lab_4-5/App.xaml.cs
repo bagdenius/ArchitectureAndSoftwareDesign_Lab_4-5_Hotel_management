@@ -16,7 +16,6 @@ namespace UI
             builder.RegisterModule<ServiceModule>();
             builder.RegisterModule<UoWModule>();
             builder.RegisterModule<MappingModule>();
-
             var container = builder.Build();
 
             using var scope = container.BeginLifetimeScope();
