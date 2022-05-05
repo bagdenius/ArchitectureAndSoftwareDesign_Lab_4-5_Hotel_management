@@ -1,4 +1,4 @@
-﻿namespace Domains.enums
+﻿namespace Models.enums
 {
     public enum RoomCategory
     {

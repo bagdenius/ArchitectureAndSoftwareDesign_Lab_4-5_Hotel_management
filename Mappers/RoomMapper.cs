@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Domains;
 using Entities;
+using Models;
 using System.Linq.Expressions;
 
 namespace Mappers
@@ -10,6 +11,7 @@ namespace Mappers
         public RoomMapper()
         {
             CreateMap<Room, RoomEntity>().ReverseMap();
+            CreateMap<Room, RoomModel>().ReverseMap();
             //CreateMap<Expression<Func<Room, bool>>, Expression<Func<RoomEntity, bool>>>().ReverseMap();
             //CreateMap<Func<IQueryable<Room>, IOrderedQueryable<Room>>, Func<IQueryable<RoomEntity>, IOrderedQueryable<RoomEntity>>>().ReverseMap();
         }

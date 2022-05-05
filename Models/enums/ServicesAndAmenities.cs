@@ -1,4 +1,4 @@
-﻿namespace Entities.enums
+﻿namespace Models.enums
 {
     public enum ServicesAndAmenities
     {

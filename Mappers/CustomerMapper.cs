@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Domains;
 using Entities;
+using Models;
 
 namespace Mappers
 {
@@ -9,6 +10,7 @@ namespace Mappers
         public CustomerMapper()
         {
             CreateMap<Customer, CustomerEntity>().ReverseMap();
+            CreateMap<Customer, CustomerModel>().ReverseMap();
         }
     }
 }

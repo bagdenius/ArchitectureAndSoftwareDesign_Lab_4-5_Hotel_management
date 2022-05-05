@@ -3,16 +3,16 @@ using Domains;
 using Entities;
 using Services.Abstract;
 using System.Linq.Expressions;
-using RepositoriesUoW.Abstract;
+using UoW.Abstract;
 
 namespace Services
 {
     public class CustomersService : IService<Customer>
     {
-        private readonly IRepositoriesUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public CustomersService(IRepositoriesUnitOfWork unitOfWork, IMapper mapper)
+        public CustomersService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

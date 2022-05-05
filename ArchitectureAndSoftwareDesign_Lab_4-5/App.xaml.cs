@@ -4,8 +4,8 @@ using AutoMapper;
 using DI;
 using Domains;
 using Mappers;
-using RepositoriesUoW;
-using RepositoriesUoW.Abstract;
+using UoW;
+using UoW.Abstract;
 using Services;
 using Services.Abstract;
 using System.Windows;
@@ -21,7 +21,7 @@ namespace UI
             builder.RegisterType<RoomsService>().As<IService<Room>>();
             builder.RegisterType<HotelsService>().As<IService<Hotel>>();
             builder.RegisterType<CustomersService>().As<IService<Customer>>();            
-            builder.RegisterType<RepositoriesUnitOfWork>().As<IRepositoriesUnitOfWork>();
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
             builder.RegisterModule<MappersModule>();
 
             var container = builder.Build();

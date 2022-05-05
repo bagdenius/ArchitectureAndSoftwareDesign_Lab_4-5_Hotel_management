@@ -13,9 +13,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Mappers\Mappers.csproj" />
-    <ProjectReference Include="..\ServicesUoW\ServicesUoW.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />
-    <ProjectReference Include="..\UoW\RepositoriesUoW.csproj" />
+    <ProjectReference Include="..\UoW\UoW.csproj" />
   </ItemGroup>
 
 </Project>

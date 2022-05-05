@@ -5,7 +5,6 @@ namespace Database
 {
     public class ApplicationDbContext : DbContext
     {
-        // *Maybe it should be Singleton
         public ApplicationDbContext()
         {
             Database.EnsureDeleted();
@@ -18,5 +17,9 @@ namespace Database
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=HotelManagementDb");
         }
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<List<ServicesAndAmenities>>().HasNoKey();
+        //}
     }
 }
