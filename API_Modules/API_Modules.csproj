@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BLL_Modules\BLL_Modules.csproj" />
     <ProjectReference Include="..\Controllers\Controllers.csproj" />
   </ItemGroup>
 

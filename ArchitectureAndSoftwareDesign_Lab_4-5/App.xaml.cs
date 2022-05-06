@@ -1,7 +1,5 @@
 ﻿using Autofac;
-using BLL_Modules;
 using System.Windows;
-using DAL_Modules;
 using API_Modules;
 
 namespace UI
@@ -11,11 +9,10 @@ namespace UI
         protected override void OnStartup(StartupEventArgs e)
         {
             var builder = new ContainerBuilder();
+
             builder.RegisterType<MainWindow>().SingleInstance();
             builder.RegisterModule<ControllerModule>();
-            builder.RegisterModule<ServiceModule>();
-            builder.RegisterModule<UoWModule>();
-            builder.RegisterModule<MappingModule>();
+
             var container = builder.Build();
 
             using var scope = container.BeginLifetimeScope();

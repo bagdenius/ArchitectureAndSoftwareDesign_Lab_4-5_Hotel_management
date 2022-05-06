@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DAL_Modules\DAL_Modules.csproj" />
     <ProjectReference Include="..\Mappers\Mappers.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />
     <ProjectReference Include="..\UoW\UoW.csproj" />
