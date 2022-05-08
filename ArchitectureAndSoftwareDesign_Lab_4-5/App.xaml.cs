@@ -15,11 +15,10 @@ namespace UI
 
             var container = builder.Build();
 
-            using var scope = container.BeginLifetimeScope();
+            using (var scope = container.BeginLifetimeScope())
             {
                 var mainWindow = scope.Resolve<MainWindow>();
                 mainWindow.Show();
-
                 base.OnStartup(e);
             }
         }

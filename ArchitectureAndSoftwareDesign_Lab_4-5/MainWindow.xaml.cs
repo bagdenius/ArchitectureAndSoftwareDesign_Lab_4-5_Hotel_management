@@ -1,6 +1,5 @@
 ﻿using Controllers.Abstract;
 using Models;
-using Models.enums;
 using System.Windows;
 
 namespace UI
@@ -18,28 +17,40 @@ namespace UI
             _hotelsController = hotelsController;
             _roomsController = roomsController;
             _customersController = customersController;
-            
+
             Update();
         }
 
         public void Update()
         {
-
+            //RoomsDataGrid.ItemsSource = _roomsController.GetAll();
         }
 
-        private void AddButton_Click(object sender, RoutedEventArgs e)
+        private void ButtonHotelsMenu_Click(object sender, RoutedEventArgs e)
         {
-            _roomsController.Add(new RoomModel()
-            {
-                Number = "101",
-                Floor = 1,
-                Cost = 1000,
-                Area = 50,
-                roomCategory = RoomCategory.Апартаменти,
-                servicesAndAmenities = {},
-                bookingState = BookingState.Вільний
-            });
-            Update();
+
         }
+
+        private void ButtonRoomsMenu_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonBookingMenu_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonMinimizeWindow_Click(object sender, RoutedEventArgs e)
+           => WindowState = WindowState.Minimized;
+
+        private void ButtonMaximizeWindow_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Normal) WindowState = WindowState.Maximized;
+            else WindowState = WindowState.Normal;
+        }
+
+        private void ButtonCloseWindow_Click(object sender, RoutedEventArgs e)
+            => App.Current.Shutdown();
     }
 }

@@ -4,6 +4,7 @@ namespace Domains
 {
     public class Hotel : IHotel
     {
+        // Mapped properties
         public int Id { get; set; }
         public List<Room> Rooms { get; set; }
         public string Name { get; set; }

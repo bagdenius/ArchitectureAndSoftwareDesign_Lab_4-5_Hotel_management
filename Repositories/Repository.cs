@@ -30,8 +30,9 @@ namespace Repositories
 
         public void Remove(int id)
         {
-            TEntity entityToDelete = _dbSet.Find(id);
-            _dbSet.Remove(entityToDelete);
+            TEntity entity = _dbSet.Find(id);
+            _dbSet.Remove(entity);
+            _context.SaveChanges();
         }
 
         public void Remove(TEntity entity)
@@ -41,6 +42,7 @@ namespace Repositories
                 _dbSet.Attach(entity);
             }
             _dbSet.Remove(entity);
+            _context.SaveChanges();
         }
 
         public TEntity GetById(int id)
@@ -54,8 +56,8 @@ namespace Repositories
         }
 
         public List<TEntity> GetAll(
-            Expression<Func<TEntity, bool>> filter = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+            Expression<Func<TEntity, bool>>? filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
             string includeProperties = "")
         {
             IQueryable<TEntity> query = _dbSet;

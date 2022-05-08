@@ -17,8 +17,4 @@
     <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Abstract\" />
-  </ItemGroup>
-
 </Project>

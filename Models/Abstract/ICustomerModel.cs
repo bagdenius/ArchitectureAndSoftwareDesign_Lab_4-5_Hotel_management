@@ -15,7 +15,5 @@ namespace Models.Abstract
         public DateTime BirthDate { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        // unmaped properties for setting/getting mapped props
-        public Gender gender { get; set; }
     }
 }

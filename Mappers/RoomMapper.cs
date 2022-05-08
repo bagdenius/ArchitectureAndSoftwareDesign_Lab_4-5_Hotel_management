@@ -11,7 +11,7 @@ namespace Mappers
         public RoomMapper()
         {
             CreateMap<Room, RoomEntity>().ReverseMap();
-            CreateMap<Room, RoomModel>().ReverseMap();
+            CreateMap<RoomModel, Room>().ReverseMap();
             //CreateMap<Expression<Func<Room, bool>>, Expression<Func<RoomEntity, bool>>>().ReverseMap();
             //CreateMap<Func<IQueryable<Room>, IOrderedQueryable<Room>>, Func<IQueryable<RoomEntity>, IOrderedQueryable<RoomEntity>>>().ReverseMap();
         }
