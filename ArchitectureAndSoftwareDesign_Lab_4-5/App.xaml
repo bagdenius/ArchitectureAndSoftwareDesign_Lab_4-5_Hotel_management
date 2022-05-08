@@ -1,7 +1,9 @@
 ﻿<Application x:Class="UI.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:UI">
+             xmlns:local="clr-namespace:UI"
+             xmlns:viewModel ="clr-namespace:UI.ViewModels"
+             xmlns:view="clr-namespace:UI.Views">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -12,6 +14,19 @@
                 <ResourceDictionary Source="Themes/MenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="Themes/SearchBoxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModel:HotelsViewModel}">
+                <view:HotelsView/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type viewModel:RoomsViewModel}">
+                <view:RoomsView/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type viewModel:BookingViewModel}">
+                <view:BookingView/>
+            </DataTemplate>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

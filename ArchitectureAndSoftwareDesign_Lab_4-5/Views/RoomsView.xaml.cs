@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ArchitectureAndSoftwareDesign_Lab_4_5.Views
+namespace UI.Views
 {
     /// <summary>
     /// Логика взаимодействия для RoomsView.xaml

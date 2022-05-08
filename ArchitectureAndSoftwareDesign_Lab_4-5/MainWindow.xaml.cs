@@ -1,6 +1,7 @@
 ﻿using Controllers.Abstract;
 using Models;
 using System.Windows;
+using System.Windows.Input;
 
 namespace UI
 {
@@ -17,28 +18,6 @@ namespace UI
             _hotelsController = hotelsController;
             _roomsController = roomsController;
             _customersController = customersController;
-
-            Update();
-        }
-
-        public void Update()
-        {
-            //RoomsDataGrid.ItemsSource = _roomsController.GetAll();
-        }
-
-        private void ButtonHotelsMenu_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ButtonRoomsMenu_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ButtonBookingMenu_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void ButtonMinimizeWindow_Click(object sender, RoutedEventArgs e)
@@ -52,5 +31,11 @@ namespace UI
 
         private void ButtonCloseWindow_Click(object sender, RoutedEventArgs e)
             => App.Current.Shutdown();
+
+        private void MainHeaderGrid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed) DragMove();
+                
+        }
     }
 }

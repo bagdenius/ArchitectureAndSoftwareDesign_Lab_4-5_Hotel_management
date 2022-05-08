@@ -1,6 +1,6 @@
 ﻿using Models.ObservableModifications;
 
-namespace ArchitectureAndSoftwareDesign_Lab_4_5.ViewModels
+namespace UI.ViewModels
 {
     public class HotelsViewModel : ObservableObject
     {

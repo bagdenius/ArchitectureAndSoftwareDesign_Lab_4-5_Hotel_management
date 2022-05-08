@@ -6,6 +6,7 @@
     x:Name="HotelsManagement" x:Class="UI.MainWindow"
     mc:Ignorable="d"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:viewModel="clr-namespace:UI.ViewModels"
     
     Width="1280" Height="720" 
     WindowStartupLocation="CenterScreen"
@@ -14,42 +15,61 @@
     Background="Transparent"
     AllowsTransparency="True">
 
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+
     <Border Background="#272537"
             CornerRadius="10">
-
         <Grid x:Name="MainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-
-            <Border Grid.Row="0" Background="#345678" CornerRadius="5" BorderThickness="2">
-                <StackPanel Orientation="Horizontal" >
-                    <TextBlock Text="Hotel Management"
+            <Border Grid.Row="0"  
+                    Background="#345678" 
+                    CornerRadius="5" 
+                    BorderThickness="2"
+                    MouseDown="MainHeaderGrid_MouseDown">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" >
+                        <GridSplitter Width="5" 
+                                      Background="#272537" 
+                                      Cursor="Arrow" 
+                                      Margin="5 0 0 0"/>
+                        
+                        <TextBlock Text="Hotel Management"
                                Foreground="FloralWhite"
                                FontSize="16"
                                VerticalAlignment="Center"
-                               Margin="10,0,10,0" FontFamily="Kristen ITC"/>
-                    <GridSplitter Width="5" Background="#272537" Cursor="Arrow"/>
+                               Margin="10,0,10,0" 
+                               FontFamily="/Fonts/#Poppins"/>
+                        
+                        <GridSplitter Width="5" 
+                                      Background="#272537" 
+                                      Cursor="Arrow"/>
 
-                    <RadioButton Content="Готелі"
+                        <RadioButton Content="Готелі"
                                  Foreground="FloralWhite"
                                  FontSize="12"
+                                 IsChecked="True"
+                                 Command="{Binding HotelsViewCommand}"
                                  Style="{StaticResource MenuButtonTheme}"/>
 
-                    <RadioButton Content="Номери"
+                        <RadioButton Content="Номери"
                                  Foreground="FloralWhite"
                                  FontSize="12"
+                                 Command="{Binding RoomsViewCommand}"
                                  Style="{StaticResource MenuButtonTheme}"/>
 
-                    <RadioButton Content="Бронювання"
+                        <RadioButton Content="Бронювання"
                                  Foreground="FloralWhite"
                                  FontSize="12"
+                                 Command="{Binding BookingViewCommand}"
                                  Style="{StaticResource MenuButtonTheme}"/>
-                </StackPanel>
-            </Border>
+                    </StackPanel>
 
-            <Button Content="―"
+                    <Button Content="―"
                     Foreground="#272537"
                     Background="Transparent"
                     BorderBrush="#272537"
@@ -61,7 +81,7 @@
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Click="ButtonMinimizeWindow_Click"/>
 
-            <Button Content="▭"
+                    <Button Content="▭"
                     Foreground="#272537"
                     Background="Transparent"
                     BorderBrush="#272537"
@@ -73,7 +93,7 @@
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Click="ButtonMaximizeWindow_Click"/>
 
-            <Button Content="╳"
+                    <Button Content="╳"
                     Foreground="#272537"
                     Background="Transparent"
                     BorderBrush="#272537"
@@ -83,8 +103,11 @@
                     Width="46" Height="30"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Click="ButtonCloseWindow_Click"/>
+                </Grid>
+            </Border>
 
-            <ContentControl Grid.Row="1"/>
+            <ContentControl Grid.Row="1"
+                            Content="{Binding CurrentView}"/>
         </Grid>
     </Border>
 </Window>
