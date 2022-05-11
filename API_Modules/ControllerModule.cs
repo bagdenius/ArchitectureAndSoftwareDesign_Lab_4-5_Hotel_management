@@ -10,9 +10,9 @@ namespace API_Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<HotelsController>().As<IController<HotelModel>>();
-            builder.RegisterType<RoomsController>().As<IController<RoomModel>>();
-            builder.RegisterType<CustomersController>().As<IController<CustomerModel>>();
+            builder.RegisterType<HotelsController>().As<IController<HotelModel>>().SingleInstance();
+            builder.RegisterType<RoomsController>().As<IController<RoomModel>>().SingleInstance();
+            builder.RegisterType<CustomersController>().As<IController<CustomerModel>>().SingleInstance();
             builder.RegisterModule<ServiceModule>();
             builder.RegisterModule<MappingModule>();
         }

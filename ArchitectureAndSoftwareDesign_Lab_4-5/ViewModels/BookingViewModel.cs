@@ -4,6 +4,9 @@ namespace UI.ViewModels
 {
     public class BookingViewModel : ObservableObject
     {
+        public BookingViewModel()
+        {
 
+        }
     }
 }

@@ -19,5 +19,7 @@ namespace Entities
         public string BookingState { get; set; }
         public DateTime? BookingStartDate { get; set; }
         public DateTime? BookingEndDate { get; set; }
+        public int? HotelId { get; set; }
+        public virtual HotelEntity Hotel { get; set; }
     }
 }

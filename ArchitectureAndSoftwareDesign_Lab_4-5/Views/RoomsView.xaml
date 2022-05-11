@@ -3,10 +3,186 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodels="clr-namespace:UI.ViewModels"
+             xmlns:enums="clr-namespace:Models.enums;assembly=Models"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:model="clr-namespace:Models;assembly=Models"
              xmlns:local="clr-namespace:UI.Views"
+             xmlns:i ="using:WinRtBehaviors"
+             xmlns:custom="using:WinRtExt.Behavior" 
+             d:DataContext="{d:DesignInstance Type={x:Type viewmodels:RoomsViewModel}}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Інформація про номер"
+            HorizontalAlignment="Center"
+            TextWrapping="Wrap"
+            VerticalAlignment="Bottom"
+            Foreground="LightGray"
+            Grid.Column="0" Grid.Row="0"
+            FontSize="15"
+            Style="{StaticResource MaterialDesignHeadline1TextBlock}"/>
+
+
+        <TextBox x:Name="SearchBox" 
+                 Grid.Row="0" Grid.Column="1"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Center"
+                 Foreground="FloralWhite"
+                 Margin="20 0 0 0"
+                 Width="200"
+                 Text="{Binding SearchValue}"
+                 TextChanged="SearchBox_TextChanged"
+                 Style="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                 materialDesign:HintAssist.Hint="Пошук"/>
+
+        <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" VerticalScrollBarVisibility="Hidden">
+            <StackPanel>
+                <ComboBox x:Name="ComboBoxHotelSelecting" 
+                      IsEditable="False"
+                      materialDesign:HintAssist.Hint="Оберіть готель"
+                      Foreground="FloralWhite"
+                      Margin="10 0 10 10"
+                      Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                      DisplayMemberPath="Name"
+                      IsReadOnly="True"
+                      ItemsSource="{Binding Hotels}"
+                      SelectedValue="{Binding SelectedHotel}"/>
+
+                <TextBox x:Name="TextBox_RoomNumber"
+                     materialDesign:HintAssist.Hint="Номер"
+                     Foreground="FloralWhite"
+                     Margin="10 0 10 10"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     Text="{Binding Room.Number}"/>
+
+                <ComboBox x:Name="ComboBoxFloor" 
+                      IsEditable="False"
+                      materialDesign:HintAssist.Hint="Виберіть поверх"
+                      Foreground="FloralWhite"
+                      Margin="10 0 10 10"
+                      Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                      IsReadOnly="True"
+                      ItemsSource="{Binding FloorValues, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding Room.Floor}"/>
+
+                <TextBox x:Name="TextBox_Cost"
+                     materialDesign:HintAssist.Hint="Ціна"
+                     Foreground="FloralWhite"
+                     Margin="10 0 10 10"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     Text="{Binding Room.Cost}"/>
+
+                <TextBox x:Name="TextBox_Area"
+                     materialDesign:HintAssist.Hint="Площа"
+                     Foreground="FloralWhite"
+                     Margin="10 0 10 10"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     Text="{Binding Room.Area}"/>
+
+                <ComboBox x:Name="ComboBoxRoomCategory" 
+                      IsEditable="False"
+                      materialDesign:HintAssist.Hint="Категорія номера"
+                      Foreground="FloralWhite"
+                      Margin="10 0 10 10"
+                      Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                      IsReadOnly="True"
+                      ItemsSource="{Binding RoomCategoryValues}"
+                      SelectedItem="{Binding Room.RoomCategory}"/>
+
+                <ComboBox x:Name="ComboBoxWindowsView" 
+                      IsEditable="False"
+                      materialDesign:HintAssist.Hint="Вид з вікна"
+                      Foreground="FloralWhite"
+                      Margin="10 0 10 10"
+                      Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                      IsReadOnly="True"
+                      ItemsSource="{Binding WindowsViewValues}"
+                      SelectedItem="{Binding Room.WindowsView}"/>
+
+                <TextBlock Text="Оберіть додаткові послуги та зручності"
+            HorizontalAlignment="Center"
+            TextWrapping="Wrap"
+            VerticalAlignment="Bottom"
+            Foreground="LightGray"
+            FontSize="11"
+            Style="{StaticResource MaterialDesignHeadline1TextBlock}"/>
+
+
+                <ListBox x:Name="ListBox_ServicesAndAmenities"
+                         Height="Auto"
+                         ItemsSource="{Binding ServicesAndAmenitiesValues}"
+                         Style="{StaticResource MaterialDesignFilterChipPrimaryListBox}"
+                         SelectionMode="Multiple"
+                         SelectionChanged="ListBox_ServicesAndAmenities_SelectionChanged">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource MaterialDesignFilterChipPrimaryListBoxItem}">
+                            <Setter Property="IsSelected" Value="{Binding Mode=TwoWay, Path=IsSelected}"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+
+            </StackPanel>
+        </ScrollViewer>
+
+
+        <DataGrid x:Name="RoomsDataGrid" 
+                  AutoGenerateColumns="False" 
+                  CanUserResizeRows="True" 
+                  SelectionMode="Single" 
+                  CanUserAddRows="False" 
+                  CanUserDeleteRows="False" 
+                  IsReadOnly="True" 
+                  SelectionUnit="FullRow"
+                  Grid.Row="1" Grid.Column="1"
+                  ItemsSource="{Binding Rooms, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedValuePath="Id"
+                  SelectedValue="{Binding SelectedId}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Номер" Width="80" Binding="{Binding Number}"/>
+                <DataGridTextColumn Header="Поверх" Width="80" Binding="{Binding Floor}"/>
+                <DataGridTextColumn Header="Ціна" Width="80" Binding="{Binding Cost}"/>
+                <DataGridTextColumn Header="Площа " Width="80" Binding="{Binding Area}"/>
+                <DataGridTextColumn Header="Тип" Width="80" Binding="{Binding RoomCategory}"/>
+                <DataGridTextColumn Header="Послуги та зручності" Width="*" Binding="{Binding ServicesAndAmenities}"/>
+                <DataGridTextColumn Header="Вид з вікон" Width="120" Binding="{Binding WindowsView}"/>
+                <DataGridTextColumn Header="Стан" Width="100" Binding="{Binding BookingState}"/>
+                <DataGridTextColumn Header="Дата бронювання" Width="200" Binding="{Binding BookingStartDate}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="2" Grid.Column="1">
+
+            <Button x:Name="ButtonAddRoom"
+                    Content="Додати номер"
+                    Margin="2"
+                    Command="{Binding AddRoomCommand}"/>
+
+            <Button x:Name="ButtonUpdateRoom"
+                    Content="Змінити номер"
+                    Margin="2"
+                    Command="{Binding UpdateRoomCommand}"/>
+
+            <Button x:Name="ButtonRemoveHotel"
+                    Content="Видалити номер"
+                    Margin="2"
+                    Command="{Binding RemoveRoomCommand}"/>
+
+
+        </StackPanel>
+
+
     </Grid>
 </UserControl>

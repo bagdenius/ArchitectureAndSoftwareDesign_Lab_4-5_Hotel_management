@@ -24,14 +24,14 @@ namespace Repositories
 
         public void Update(TEntity entity)
         {
-            _dbSet.Attach(entity);
+            //_dbSet.Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
         public void Remove(int id)
         {
-            TEntity entity = _dbSet.Find(id);
-            _dbSet.Remove(entity);
+            _dbSet.Remove(_dbSet.Find(id));
             _context.SaveChanges();
         }
 
@@ -47,12 +47,17 @@ namespace Repositories
 
         public TEntity GetById(int id)
         {
-            return _dbSet.Find(id);
+            var entity = _dbSet.Find(id);
+            _context.Entry(entity).State = EntityState.Detached;
+            return entity;
         }
 
         public List<TEntity> GetAll()
         {
-            return _dbSet.ToList();
+            var entities = _dbSet.ToList();
+            //foreach (var entity in entities)
+            //    _context.Entry(entity).State = EntityState.Detached;
+            return entities;
         }
 
         public List<TEntity> GetAll(

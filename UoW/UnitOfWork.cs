@@ -10,9 +10,10 @@ namespace UoW
     {
         private readonly ApplicationDbContext _context;
 
-        public UnitOfWork()
+        public UnitOfWork(ApplicationDbContext context, IRepository<HotelEntity> hotelsRepository)
         {
-            _context = new ApplicationDbContext();
+            _context = context;
+            _hotelsRepository = hotelsRepository;
         }
 
         private IRepository<HotelEntity> _hotelsRepository;

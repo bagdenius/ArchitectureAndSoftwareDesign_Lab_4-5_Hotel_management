@@ -29,8 +29,11 @@ namespace Models
         public double Area { get; set; }
 
         public string RoomCategory { get; set; }
-
-        public string ServicesAndAmenities { get; set; }
+        public string ServicesAndAmenities 
+        {
+            get;
+            set;
+        }
 
         public string WindowsView { get; set; }
 
@@ -39,6 +42,9 @@ namespace Models
         public DateTime? BookingStartDate { get; set; }
 
         public DateTime? BookingEndDate { get; set; }
+
+        public int? HotelId { get; set; }
+        public virtual HotelModel Hotel { get; set; }
 
     }
 }

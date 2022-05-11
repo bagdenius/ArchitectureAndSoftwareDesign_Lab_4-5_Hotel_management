@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using System.Windows;
-using API_Modules;
+using UI.Views;
+using UI.Main_module;
+using UI.ViewModels;
 
 namespace UI
 {
@@ -9,15 +11,21 @@ namespace UI
         protected override void OnStartup(StartupEventArgs e)
         {
             var builder = new ContainerBuilder();
-
-            builder.RegisterType<MainWindow>().SingleInstance();
-            builder.RegisterModule<ControllerModule>();
-
+            builder.RegisterModule<MainModule>();
             var container = builder.Build();
 
             using (var scope = container.BeginLifetimeScope())
             {
                 var mainWindow = scope.Resolve<MainWindow>();
+
+                scope.Resolve<MainViewModel>();
+                scope.Resolve<HotelsViewModel>();
+                scope.Resolve<RoomsViewModel>();
+                scope.Resolve<BookingViewModel>();
+
+                scope.Resolve<HotelsView>();
+                scope.Resolve<RoomsView>();
+                scope.Resolve<BookingView>();
                 mainWindow.Show();
                 base.OnStartup(e);
             }

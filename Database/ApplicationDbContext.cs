@@ -16,6 +16,7 @@ namespace Database
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=HotelManagementDb");
+            optionsBuilder.EnableSensitiveDataLogging();
         }
     }
 }

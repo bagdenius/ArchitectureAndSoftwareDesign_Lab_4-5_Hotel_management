@@ -10,9 +10,9 @@ namespace BLL_Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<HotelsService>().As<IService<Hotel>>();
-            builder.RegisterType<RoomsService>().As<IService<Room>>();
-            builder.RegisterType<CustomersService>().As<IService<Customer>>();
+            builder.RegisterType<HotelsService>().As<IService<Hotel>>().SingleInstance();
+            builder.RegisterType<RoomsService>().As<IService<Room>>().SingleInstance();
+            builder.RegisterType<CustomersService>().As<IService<Customer>>().SingleInstance();
             builder.RegisterModule<UoWModule>();
         }
     }

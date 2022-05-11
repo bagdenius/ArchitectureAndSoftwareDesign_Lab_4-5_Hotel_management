@@ -1,4 +1,6 @@
 ﻿using Models.ObservableModifications;
+using System.Windows;
+using System.Windows.Input;
 using UI.Commands;
 
 namespace UI.ViewModels
@@ -23,18 +25,16 @@ namespace UI.ViewModels
             }
         }
 
-        public MainViewModel()
+        public MainViewModel(HotelsViewModel hotelsVM, RoomsViewModel roomsVM, BookingViewModel bookingVM)
         {
-            HotelsVM = new HotelsViewModel();
-            RoomsVM = new RoomsViewModel();
-            BookingVM = new BookingViewModel();
+            HotelsVM = hotelsVM;
+            RoomsVM = roomsVM;
+            BookingVM = bookingVM;
             CurrentView = HotelsVM;
 
             HotelsViewCommand = new RelayCommand(o => CurrentView = HotelsVM);
             RoomsViewCommand = new RelayCommand(o => CurrentView = RoomsVM);
             BookingViewCommand = new RelayCommand(o => CurrentView = BookingVM);
         }
-
-
     }
 }
