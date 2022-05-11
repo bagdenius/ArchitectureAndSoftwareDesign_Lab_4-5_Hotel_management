@@ -1,28 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using Controllers.Abstract;
+using Models;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace UI.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для BookingView.xaml
-    /// </summary>
     public partial class BookingView : UserControl
     {
-        public BookingView()
+        private readonly IController<HotelModel> _hotelsController;
+        private readonly IController<RoomModel> _roomsController;
+        private readonly IController<CustomerModel> _customersController;
+        public BookingView(IController<HotelModel> hotelsController, IController<RoomModel> roomsController,
+            IController<CustomerModel> customersController)
         {
             InitializeComponent();
+            // controllers init
+            _hotelsController = hotelsController;
+            _roomsController = roomsController;
+            _customersController = customersController;
+        }
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

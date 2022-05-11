@@ -3,12 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodels="clr-namespace:UI.ViewModels"
-             xmlns:System="clr-namespace:System;assembly=System.Runtime" x:Class="UI.Views.HotelsView"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:System="clr-namespace:System;assembly=System.Runtime" 
+             x:Class="UI.Views.HotelsView"
              xmlns:model="clr-namespace:Models;assembly=Models"
-             d:DataContext="{d:DesignInstance Type={x:Type viewmodels:HotelsViewModel}}"
              mc:Ignorable="d" 
-             d:DesignHeight="690" d:DesignWidth="1280">
+             d:DesignHeight="690" d:DesignWidth="1280"
+             Loaded="HotelsView_Loaded">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -35,8 +36,7 @@
                  Foreground="FloralWhite"
                  Margin="20 0 0 0"
                  Width="200"
-                 Text="{Binding SearchValue}"
-                 TextChanged="SearchBox_TextChanged"
+                 Text="{Binding SearchValue, UpdateSourceTrigger=PropertyChanged}"
                  Style="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                  materialDesign:HintAssist.Hint="Пошук"/>
 
@@ -44,12 +44,12 @@
                     Grid.Row="1" Grid.RowSpan="2"
                     Grid.Column="0">
 
-            <TextBox x:Name="TextBoxHotelName" 
+            <TextBox x:Name="TextBoxHotelName"
                      materialDesign:HintAssist.Hint="Назва готелю"
                      Foreground="FloralWhite"
                      Margin="10 0 10 10"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     Text="{Binding Hotel.Name}"/>
+                     Text="{Binding Hotel.Name, ValidatesOnExceptions=True , UpdateSourceTrigger=PropertyChanged}"/>
 
             <ComboBox x:Name="ComboBoxStars" 
                       IsEditable="False"
@@ -61,29 +61,30 @@
                       SelectedValuePath="Selected"
                       DisplayMemberPath="Display"
                       IsReadOnly="True"
-                      SelectedValue="{Binding Hotel.Stars}">
+                      SelectedValue="{Binding Hotel.Stars, ValidatesOnExceptions=True , UpdateSourceTrigger=PropertyChanged}">
             </ComboBox>
 
-            <TextBox x:Name="TextBoxFloorsNumber" 
+            <TextBox x:Name="TextBoxFloorsNumber"
                      materialDesign:HintAssist.Hint="Кількість поверхів"
                      Foreground="FloralWhite"
                      Margin="10 0 10 10"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     Text="{Binding Hotel.NumberOfFloors}"/>
+                     Text="{Binding Hotel.NumberOfFloors, ValidatesOnExceptions=True , UpdateSourceTrigger=PropertyChanged}"
+                     PreviewTextInput="TextBoxFloorsNumber_PreviewTextInput"/>
 
             <TextBox x:Name="TextBoxAddress" 
                      materialDesign:HintAssist.Hint="Адреса готелю"
                      Foreground="FloralWhite"
                      Margin="10 0 10 10"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     Text="{Binding Hotel.Address}"/>
+                     Text="{Binding Hotel.Address, ValidatesOnExceptions=True , UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBox x:Name="TextBoxPhone" 
                      materialDesign:HintAssist.Hint="Телефон готелю"
                      Foreground="FloralWhite"
                      Margin="10 0 10 10"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     Text="{Binding Hotel.Phone}"/>
+                     Text="{Binding Hotel.Phone, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
 
         </StackPanel>
 
@@ -93,22 +94,26 @@
             <Button x:Name="ButtonAddHotel"
                     Content="Додати готель"
                     Margin="2"
-                    Command="{Binding AddHotelCommand}"/>
+                    Click="ButtonAddHotel_Click"/>
 
             <Button x:Name="ButtonUpdateHotel"
                     Content="Змінити готель"
                     Margin="2"
-                    Command="{Binding UpdateHotelCommand}"/>
+                    Click="ButtonUpdateHotel_Click"/>
 
             <Button x:Name="ButtonRemoveHotel"
                     Content="Видалити готель"
                     Margin="2"
-                    Command="{Binding RemoveHotelCommand}"/>
-            
+                    Click="ButtonRemoveHotel_Click"/>
+
+            <Button x:Name="ButtonClearFields"
+                    Content="Очистити поля"
+                    Margin="2"
+                    Click="ButtonClearFields_Click"/>
 
         </StackPanel>
 
-        <DataGrid x:Name="RoomsDataGrid" 
+        <DataGrid x:Name="HotelsDataGrid" 
                   AutoGenerateColumns="False" 
                   CanUserResizeRows="True" 
                   SelectionMode="Single" 
@@ -117,10 +122,14 @@
                   IsReadOnly="True" 
                   SelectionUnit="FullRow"
                   Grid.Row="1" Grid.Column="1"
-                  ItemsSource="{Binding Hotels, UpdateSourceTrigger=PropertyChanged}"
                   Margin="0 0 10 0"
                   SelectedValuePath="Id"
                   SelectedValue="{Binding SelectedId}">
+            <DataGrid.ItemContainerStyle>
+                <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                    <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
+                </Style>
+            </DataGrid.ItemContainerStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Назва готелю" Width="*" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Зірковість" Width="*" Binding="{Binding Stars}"/>

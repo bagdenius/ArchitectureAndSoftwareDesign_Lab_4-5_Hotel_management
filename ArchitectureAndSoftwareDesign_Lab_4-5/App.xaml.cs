@@ -2,7 +2,6 @@
 using System.Windows;
 using UI.Views;
 using UI.Main_module;
-using UI.ViewModels;
 
 namespace UI
 {
@@ -17,11 +16,6 @@ namespace UI
             using (var scope = container.BeginLifetimeScope())
             {
                 var mainWindow = scope.Resolve<MainWindow>();
-
-                scope.Resolve<MainViewModel>();
-                scope.Resolve<HotelsViewModel>();
-                scope.Resolve<RoomsViewModel>();
-                scope.Resolve<BookingViewModel>();
 
                 scope.Resolve<HotelsView>();
                 scope.Resolve<RoomsView>();

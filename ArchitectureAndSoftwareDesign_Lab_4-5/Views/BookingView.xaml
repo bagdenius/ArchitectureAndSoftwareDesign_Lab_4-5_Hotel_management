@@ -3,10 +3,126 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:UI.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Інформація про бронювання"
+                   Foreground="LightGray"
+                   FontSize="15"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Center"
+                   Style="{StaticResource MaterialDesignHeadline1TextBlock}"/>
+
+        <TextBox x:Name="SearchBox" 
+                 Grid.Row="0" Grid.Column="1"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Center"
+                 Foreground="FloralWhite"
+                 Margin="20 0 0 0"
+                 Width="200"
+                 Text=""
+                 TextChanged="SearchBox_TextChanged"
+                 Style="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                 materialDesign:HintAssist.Hint="Пошук"/>
+
+        <StackPanel Orientation="Vertical" 
+                    Grid.Row="1" Grid.RowSpan="2"
+                    Grid.Column="0">
+
+            <ComboBox x:Name="ComboBoxHotelSelecting" 
+                      IsEditable="False"
+                      materialDesign:HintAssist.Hint="Оберіть готель"
+                      Foreground="FloralWhite"
+                      Margin="10 0 10 10"
+                      Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                      DisplayMemberPath="Name"
+                      IsReadOnly="True"
+                      SelectedValue=""/>
+
+            <ComboBox x:Name="ComboBoxStars" 
+                      IsEditable="False"
+                      materialDesign:HintAssist.Hint="Виберіть кількість зірок"
+                      Foreground="FloralWhite"
+                      Margin="10 0 10 10"
+                      Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                      SelectedValuePath="Selected"
+                      DisplayMemberPath="Display"
+                      IsReadOnly="True"
+                      SelectedValue="">
+            </ComboBox>
+
+            <TextBox x:Name="TextBoxFloorsNumber" 
+                     materialDesign:HintAssist.Hint="Кількість поверхів"
+                     Foreground="FloralWhite"
+                     Margin="10 0 10 10"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     Text=""/>
+
+            <TextBox x:Name="TextBoxAddress" 
+                     materialDesign:HintAssist.Hint="Адреса готелю"
+                     Foreground="FloralWhite"
+                     Margin="10 0 10 10"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     Text=""/>
+
+            <TextBox x:Name="TextBoxPhone" 
+                     materialDesign:HintAssist.Hint="Телефон готелю"
+                     Foreground="FloralWhite"
+                     Margin="10 0 10 10"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     Text=""/>
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="2" Grid.Column="1">
+
+            <Button x:Name="ButtonAddHotel"
+                    Content="Додати готель"
+                    Margin="2"/>
+
+            <Button x:Name="ButtonUpdateHotel"
+                    Content="Змінити готель"
+                    Margin="2"/>
+
+            <Button x:Name="ButtonRemoveHotel"
+                    Content="Видалити готель"
+                    Margin="2"/>
+
+
+        </StackPanel>
+
+        <DataGrid x:Name="RoomsDataGrid" 
+                  AutoGenerateColumns="False" 
+                  CanUserResizeRows="True" 
+                  SelectionMode="Single" 
+                  CanUserAddRows="False" 
+                  CanUserDeleteRows="False" 
+                  IsReadOnly="True" 
+                  SelectionUnit="FullRow"
+                  Grid.Row="1" Grid.Column="1"
+                  Margin="0 0 10 0"
+                  SelectedValuePath="Id">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Назва готелю" Width="*" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Зірковість" Width="*" Binding="{Binding Stars}"/>
+                <DataGridTextColumn Header="Адреса" Width="*" Binding="{Binding Address}"/>
+                <DataGridTextColumn Header="Телефон" Width="*" Binding="{Binding Phone}"/>
+                <DataGridTextColumn Header="Кількість поверхів" Width="*" Binding="{Binding NumberOfFloors}"/>
+                <DataGridTextColumn Header="Кількість номерів " Width="*" Binding="{Binding NumberOfRooms}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

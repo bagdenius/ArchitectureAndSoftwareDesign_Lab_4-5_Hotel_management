@@ -1,9 +1,8 @@
-﻿using Models.Abstract;
-using Models.ObservableModifications;
+﻿using Models.ObservableModifications;
 
 namespace Models
 {
-    public class RoomModel : ObservableObject, IRoomModel
+    public class RoomModel : ObservableObject
     {
         // fields
         private string number;
@@ -43,8 +42,9 @@ namespace Models
 
         public DateTime? BookingEndDate { get; set; }
 
-        public int? HotelId { get; set; }
-        public virtual HotelModel Hotel { get; set; }
-
+        public int HotelId { get; set; }
+        public HotelModel Hotel { get; set; }
+        public int? CustomerId { get; set; }
+        public CustomerModel Customer { get; set; }
     }
 }

@@ -7,6 +7,7 @@
     x:Class="UI.MainWindow"
     mc:Ignorable="d"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:views="clr-namespace:UI.Views"
     xmlns:System="clr-namespace:System;assembly=mscorlib"
     xmlns:enums="clr-namespace:Models.enums;assembly=Models"
     Width="1280" Height="720" 
@@ -57,19 +58,22 @@
                                  FontSize="12"
                                  IsChecked="True"
                                  Command="{Binding HotelsViewCommand}"
-                                 Style="{StaticResource MenuButtonTheme}"/>
+                                 Style="{StaticResource MenuButtonTheme}"
+                                 Click="ButtonSetHotelsView_Click"/>
 
                         <RadioButton Content="Номери"
                                  Foreground="FloralWhite"
                                  FontSize="12"
                                  Command="{Binding RoomsViewCommand}"
-                                 Style="{StaticResource MenuButtonTheme}"/>
+                                 Style="{StaticResource MenuButtonTheme}"
+                                 Click="ButtonSetRoomsView_Click"/>
 
                         <RadioButton Content="Бронювання"
                                  Foreground="FloralWhite"
                                  FontSize="12"
                                  Command="{Binding BookingViewCommand}"
-                                 Style="{StaticResource MenuButtonTheme}"/>
+                                 Style="{StaticResource MenuButtonTheme}"
+                                 Click="ButtonSetBookingsView_Click"/>
                     </StackPanel>
 
                     <Button Content="―"
@@ -109,8 +113,8 @@
                 </Grid>
             </Border>
 
-            <ContentControl Grid.Row="1"
-                            Content="{Binding CurrentView}"/>
+            <ContentControl x:Name="ViewsContentControl" 
+                            Grid.Row="1"/>
         </Grid>
     </Border>
 </Window>

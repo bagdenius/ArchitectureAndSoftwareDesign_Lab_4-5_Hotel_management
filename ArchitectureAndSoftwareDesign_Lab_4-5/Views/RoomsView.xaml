@@ -3,14 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodels="clr-namespace:UI.ViewModels"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:enums="clr-namespace:Models.enums;assembly=Models"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:model="clr-namespace:Models;assembly=Models"
              xmlns:local="clr-namespace:UI.Views"
              xmlns:i ="using:WinRtBehaviors"
              xmlns:custom="using:WinRtExt.Behavior" 
-             d:DataContext="{d:DesignInstance Type={x:Type viewmodels:RoomsViewModel}}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -58,7 +57,7 @@
                       DisplayMemberPath="Name"
                       IsReadOnly="True"
                       ItemsSource="{Binding Hotels}"
-                      SelectedValue="{Binding SelectedHotel}"/>
+                      SelectedValue="{Binding SelectedHotel, Mode=TwoWay}"/>
 
                 <TextBox x:Name="TextBox_RoomNumber"
                      materialDesign:HintAssist.Hint="Номер"
@@ -125,12 +124,8 @@
                          ItemsSource="{Binding ServicesAndAmenitiesValues}"
                          Style="{StaticResource MaterialDesignFilterChipPrimaryListBox}"
                          SelectionMode="Multiple"
-                         SelectionChanged="ListBox_ServicesAndAmenities_SelectionChanged">
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource MaterialDesignFilterChipPrimaryListBoxItem}">
-                            <Setter Property="IsSelected" Value="{Binding Mode=TwoWay, Path=IsSelected}"/>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
+                         SelectedItem="{Binding Room.ServicesAndAmenities}">
+                    
                 </ListBox>
 
             </StackPanel>

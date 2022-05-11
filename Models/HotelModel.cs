@@ -1,9 +1,9 @@
-﻿using Models.Abstract;
-using Models.ObservableModifications;
+﻿using Models.ObservableModifications;
+using System.Text.RegularExpressions;
 
 namespace Models
 {
-    public class HotelModel : ObservableObject, IHotelModel
+    public class HotelModel : ObservableObject
     {
         // fields
         private string name;
@@ -19,8 +19,14 @@ namespace Models
 
         public string Name
         {
-            get;
-            set;
+            get => name;
+            set
+            {
+                if (name != value)
+                {
+                    name = value; OnPropertyChanged();
+                }
+            }
         }
 
         public string Stars
@@ -29,16 +35,17 @@ namespace Models
             set { if (stars == value) return; stars = value; OnPropertyChanged(); }
         }
 
-        public int NumberOfRooms
-        {
-            get;
-            set;
-        }
+        public int NumberOfRooms { get; set; }
 
         public int NumberOfFloors
         {
-            get;
-            set;
+            get => numberOfFloors;
+            set
+            {
+                if (!int.TryParse(value.ToString(), out numberOfFloors) && value != 0)
+                    throw new ArgumentException("Введіть у числовому вигляді!");
+                OnPropertyChanged(ref numberOfFloors, value);
+            }
         }
 
         public string Address
@@ -49,8 +56,13 @@ namespace Models
 
         public string Phone
         {
-            get;
-            set;
+            get => phone;
+            set
+            {
+                if (!new Regex(@"^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$").IsMatch(value) || string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentException("Неправильний формат номера телефону!");
+                OnPropertyChanged(ref phone, value);
+            }
         }
 
     }

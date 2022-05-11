@@ -1,17 +1,37 @@
-﻿using System.Windows;
+﻿using Controllers.Abstract;
+using Models;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
-using UI.ViewModels;
+using UI.Views;
 
 namespace UI
 {
     public partial class MainWindow : Window
     {
-        public MainWindow(MainViewModel mainViewModel)
+        private readonly IController<HotelModel> _hotelsController;
+        private readonly IController<RoomModel> _roomsController;
+        private readonly IController<CustomerModel> _customersController;
+        private readonly HotelsView _hotelsView;
+        private readonly RoomsView _roomsView;
+        private readonly BookingView _bookingView;
+        public MainWindow(IController<HotelModel> hotelsController, IController<RoomModel> roomsController,
+            IController<CustomerModel> customersController, HotelsView hotelsView, RoomsView roomsView, BookingView bookingView)
         {
             InitializeComponent();
-            DataContext = mainViewModel;
+            // controllers init
+            _hotelsController = hotelsController;
+            _roomsController = roomsController;
+            _customersController = customersController;
+            // views init
+            _hotelsView = hotelsView;
+            _roomsView = roomsView;
+            _bookingView = bookingView;
+            // on start view
+            ViewsContentControl.Content = hotelsView;
         }
 
+        // Window controlling events
         private void ButtonMinimizeWindow_Click(object sender, RoutedEventArgs e)
            => WindowState = WindowState.Minimized;
 
@@ -27,6 +47,22 @@ namespace UI
         private void MainHeaderGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed) DragMove();
+        }
+
+        // Setting view events
+        private void ButtonSetHotelsView_Click(object sender, RoutedEventArgs e)
+        {
+            ViewsContentControl.Content = _hotelsView;
+        }
+
+        private void ButtonSetRoomsView_Click(object sender, RoutedEventArgs e)
+        {
+            ViewsContentControl.Content = _roomsView;
+        }
+
+        private void ButtonSetBookingsView_Click(object sender, RoutedEventArgs e)
+        {
+            ViewsContentControl.Content = _bookingView;
         }
     }
 }

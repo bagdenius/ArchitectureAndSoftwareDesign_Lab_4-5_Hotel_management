@@ -55,8 +55,8 @@ namespace Repositories
         public List<TEntity> GetAll()
         {
             var entities = _dbSet.ToList();
-            //foreach (var entity in entities)
-            //    _context.Entry(entity).State = EntityState.Detached;
+            foreach (var entity in entities)
+                _context.Entry(entity).State = EntityState.Detached;
             return entities;
         }
 

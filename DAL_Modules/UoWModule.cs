@@ -15,6 +15,8 @@ namespace DAL_Modules
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().SingleInstance();
             builder.RegisterType<ApplicationDbContext>().SingleInstance();
             builder.RegisterType<Repository<HotelEntity>>().As<IRepository<HotelEntity>>().SingleInstance();
+            builder.RegisterType<Repository<RoomEntity>>().As<IRepository<RoomEntity>>().SingleInstance();
+            builder.RegisterType<Repository<CustomerEntity>>().As<IRepository<CustomerEntity>>().SingleInstance();
         }
     }
 }

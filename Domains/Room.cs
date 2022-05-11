@@ -1,8 +1,6 @@
-﻿using Domains.Abstract;
-
-namespace Domains
+﻿namespace Domains
 {
-    public class Room : IRoom
+    public class Room
     {
         // Mapped properties
         public int Id { get; set; }
@@ -16,7 +14,9 @@ namespace Domains
         public string BookingState { get; set; }
         public DateTime? BookingStartDate { get; set; }
         public DateTime? BookingEndDate { get; set; }
-        public int? HotelId { get; set; }
-        public virtual Hotel Hotel { get; set; }
+        public int HotelId { get; set; }
+        public Hotel Hotel { get; set; }
+        public int? CustomerId { get; set; }
+        public Customer Customer { get; set; }
     }
 }

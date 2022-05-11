@@ -1,12 +1,9 @@
-﻿using Domains.Abstract;
-
-namespace Domains
+﻿namespace Domains
 {
-    public class Customer : ICustomer
+    public class Customer
     {
         // Mapped properties
         public int Id { get; set; }
-        public List<Room> BookedRooms { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Patronymic { get; set; }
@@ -15,5 +12,6 @@ namespace Domains
         public DateTime BirthDate { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public List<Room> Rooms { get; set; }
     }
 }

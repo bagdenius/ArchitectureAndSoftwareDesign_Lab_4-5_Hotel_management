@@ -1,6 +1,5 @@
 ﻿using API_Modules;
 using Autofac;
-using UI.ViewModels;
 using UI.Views;
 
 namespace UI.Main_module
@@ -15,11 +14,6 @@ namespace UI.Main_module
             builder.RegisterType<HotelsView>().SingleInstance();
             builder.RegisterType<RoomsView>().SingleInstance();
             builder.RegisterType<BookingView>().SingleInstance();
-
-            builder.RegisterType<MainViewModel>().SingleInstance();
-            builder.RegisterType<HotelsViewModel>().SingleInstance();
-            builder.RegisterType<RoomsViewModel>().SingleInstance();
-            builder.RegisterType<BookingViewModel>().SingleInstance();
         }
     }
 }

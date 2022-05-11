@@ -1,9 +1,8 @@
-﻿using Models.Abstract;
-using Models.ObservableModifications;
+﻿using Models.ObservableModifications;
 
 namespace Models
 {
-    public class CustomerModel : ObservableObject, ICustomerModel
+    public class CustomerModel : ObservableObject
     {
         // fields
         private string name;
@@ -17,8 +16,7 @@ namespace Models
 
         // mapped properties
         public int Id { get; set; }
-        public List<RoomModel> BookedRooms { get; set; }
-
+        
         public string Name { get; set; }
 
         public string Surname { get; set; }
@@ -34,6 +32,6 @@ namespace Models
         public string Phone { get; set; }
 
         public string Email { get; set; }
-
+        public List<RoomModel> Rooms { get; set; }
     }
 }
