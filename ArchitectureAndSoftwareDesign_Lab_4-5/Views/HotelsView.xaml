@@ -124,7 +124,8 @@
                   Grid.Row="1" Grid.Column="1"
                   Margin="0 0 10 0"
                   SelectedValuePath="Id"
-                  SelectedValue="{Binding SelectedId}">
+                  SelectedValue="{Binding SelectedId}"
+                  >
             <DataGrid.ItemContainerStyle>
                 <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
                     <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
@@ -134,7 +135,7 @@
                 <DataGridTextColumn Header="Назва готелю" Width="*" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Зірковість" Width="*" Binding="{Binding Stars}"/>
                 <DataGridTextColumn Header="Адреса" Width="*" Binding="{Binding Address}"/>
-                <DataGridTextColumn Header="Телефон" Width="*" Binding="{Binding Phone}"/>
+                <DataGridTextColumn Header="Телефон" Width="*" Binding="{Binding Phone, UpdateSourceTrigger=Explicit}"/>
                 <DataGridTextColumn Header="Кількість поверхів" Width="*" Binding="{Binding NumberOfFloors}"/>
                 <DataGridTextColumn Header="Кількість номерів " Width="*" Binding="{Binding NumberOfRooms}"/>
             </DataGrid.Columns>

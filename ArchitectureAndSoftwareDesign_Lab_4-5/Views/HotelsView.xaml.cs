@@ -11,17 +11,11 @@ namespace UI.Views
     public partial class HotelsView : UserControl, INotifyPropertyChanged
     {
         private readonly IController<HotelModel> _hotelsController;
-        private readonly IController<RoomModel> _roomsController;
-        private readonly IController<CustomerModel> _customersController;
         private string searchValue;
-        public HotelsView(IController<HotelModel> hotelsController, IController<RoomModel> roomsController,
-            IController<CustomerModel> customersController)
+        public HotelsView(IController<HotelModel> hotelsController)
         {
             InitializeComponent();
-            // controllers init
             _hotelsController = hotelsController;
-            _roomsController = roomsController;
-            _customersController = customersController;
             Hotel = new HotelModel();
             DataContext = this;
         }
@@ -100,7 +94,6 @@ namespace UI.Views
             UpdateDataGrid();
         }
 
-        //public void SearchBox_TextChanged(object sender, TextChangedEventArgs e) => UpdateDataGrid();
         private void TextBoxFloorsNumber_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             string inputSymbol = e.Text.ToString();
@@ -112,7 +105,7 @@ namespace UI.Views
         {
             HotelModel temp = (HotelModel)HotelsDataGrid.SelectedItem;
             TextBoxHotelName.Text = temp.Name;
-            ComboBoxStars.SelectedItem = temp.Stars;
+            ComboBoxStars.SelectedItem = StarsValues.Find(x=> x.Selected.Contains(temp.Stars.Substring(0, 1)));
             TextBoxFloorsNumber.Text = temp.NumberOfFloors.ToString();
             TextBoxAddress.Text = temp.Address;
             TextBoxPhone.Text = temp.Phone;
@@ -131,12 +124,10 @@ namespace UI.Views
         {
             if (EqualityComparer<T>.Default.Equals(backingField, value))
                 return false;
-
             backingField = value;
             OnPropertyChanged(propertyName);
             return true;
         }
-
 
         public class Value
         {

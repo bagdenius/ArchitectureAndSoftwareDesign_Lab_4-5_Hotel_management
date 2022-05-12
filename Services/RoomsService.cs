@@ -47,16 +47,5 @@ namespace Services
         {
             return _mapper.Map<List<Room>>(_unitOfWork.Rooms.GetAll());
         }
-
-        public List<Room> GetAll(
-            Expression<Func<Room, bool>>? filter = null,
-            Func<IQueryable<Room>, IOrderedQueryable<Room>>? orderBy = null,
-            string includeProperties = "")
-        {
-            return _mapper.Map<List<Room>>(_unitOfWork.Rooms.GetAll(
-                _mapper.Map<Expression<Func<RoomEntity, bool>>>(filter),
-                _mapper.Map<Func<IQueryable<RoomEntity>, IOrderedQueryable<RoomEntity>>>(orderBy),
-                includeProperties));
-        }
     }
 }

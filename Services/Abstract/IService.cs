@@ -10,9 +10,5 @@ namespace Services.Abstract
         public void Remove(TDomain domain);
         public TDomain GetById(int id);
         public List<TDomain> GetAll();
-        public List<TDomain> GetAll(
-            Expression<Func<TDomain, bool>> filter = null,
-            Func<IQueryable<TDomain>, IOrderedQueryable<TDomain>> orderBy = null,
-            string includeProperties = "");
     }
 }

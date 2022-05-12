@@ -47,16 +47,5 @@ namespace Services
         {
             return _mapper.Map<List<Customer>>(_unitOfWork.Customers.GetAll());
         }
-
-        public List<Customer> GetAll(
-            Expression<Func<Customer, bool>> filter = null,
-            Func<IQueryable<Customer>, IOrderedQueryable<Customer>> orderBy = null,
-            string includeProperties = "")
-        {
-            return _mapper.Map<List<Customer>>(_unitOfWork.Customers.GetAll(
-                _mapper.Map<Expression<Func<CustomerEntity, bool>>>(filter),
-                _mapper.Map<Func<IQueryable<CustomerEntity>, IOrderedQueryable<CustomerEntity>>>(orderBy),
-                includeProperties));
-        }
     }
 }

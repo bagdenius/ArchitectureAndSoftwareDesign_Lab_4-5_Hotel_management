@@ -10,9 +10,5 @@ namespace Controllers.Abstract
         public void Remove(TModel model);
         public TModel GetById(int id);
         public List<TModel> GetAll();
-        public List<TModel> GetAll(
-            Expression<Func<TModel, bool>> filter = null,
-            Func<IQueryable<TModel>, IOrderedQueryable<TModel>> orderBy = null,
-            string includeProperties = "");
     }
 }

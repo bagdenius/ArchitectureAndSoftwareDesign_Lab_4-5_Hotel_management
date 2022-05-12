@@ -47,16 +47,5 @@ namespace Controllers
         {
             return _mapper.Map<List<CustomerModel>>(_service.GetAll());
         }
-
-        public List<CustomerModel> GetAll(
-            Expression<Func<CustomerModel, bool>> filter = null,
-            Func<IQueryable<CustomerModel>, IOrderedQueryable<CustomerModel>> orderBy = null,
-            string includeProperties = "")
-        {
-            return _mapper.Map<List<CustomerModel>>(_service.GetAll(
-                _mapper.Map<Expression<Func<Customer, bool>>>(filter),
-                _mapper.Map<Func<IQueryable<Customer>, IOrderedQueryable<Customer>>>(orderBy),
-                includeProperties));
-        }
     }
 }

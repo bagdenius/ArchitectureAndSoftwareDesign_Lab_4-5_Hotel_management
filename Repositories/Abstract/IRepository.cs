@@ -10,9 +10,5 @@ namespace Repositories.Abstract
         public void Remove(TEntity entity);
         public TEntity GetById(int id);
         public List<TEntity> GetAll();
-        public List<TEntity> GetAll(
-            Expression<Func<TEntity, bool>> filter = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-            string includeProperties = "");
     }
 }
