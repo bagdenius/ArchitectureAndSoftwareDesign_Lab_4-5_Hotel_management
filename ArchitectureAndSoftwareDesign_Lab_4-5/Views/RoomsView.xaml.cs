@@ -190,7 +190,6 @@ namespace UI.Views
                     else Room.ServicesAndAmenities += ", " + item.ToLower();
                 }
             }
-
         }
     }
 }

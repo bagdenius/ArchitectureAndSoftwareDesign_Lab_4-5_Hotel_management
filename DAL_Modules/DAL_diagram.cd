@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="DAL_Modules.UoWModule">
+    <Position X="0.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UoWModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Database.ApplicationDbContext">
+    <Position X="4" Y="3" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Entities.CustomerEntity">
+    <Position X="11.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Entities.HotelEntity">
+    <Position X="6.5" Y="0.5" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Entities.RoomEntity">
+    <Position X="8.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Repositories.Repository&lt;TEntity&gt;">
+    <Position X="0.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="UoW.UnitOfWork">
+    <Position X="3.25" Y="0.5" Width="3" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

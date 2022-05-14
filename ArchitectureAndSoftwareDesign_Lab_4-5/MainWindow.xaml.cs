@@ -9,20 +9,12 @@ namespace UI
 {
     public partial class MainWindow : Window
     {
-        private readonly IController<HotelModel> _hotelsController;
-        private readonly IController<RoomModel> _roomsController;
-        private readonly IController<CustomerModel> _customersController;
         private readonly HotelsView _hotelsView;
         private readonly RoomsView _roomsView;
         private readonly BookingView _bookingView;
-        public MainWindow(IController<HotelModel> hotelsController, IController<RoomModel> roomsController,
-            IController<CustomerModel> customersController, HotelsView hotelsView, RoomsView roomsView, BookingView bookingView)
+        public MainWindow(HotelsView hotelsView, RoomsView roomsView, BookingView bookingView)
         {
             InitializeComponent();
-            // controllers init
-            _hotelsController = hotelsController;
-            _roomsController = roomsController;
-            _customersController = customersController;
             // views init
             _hotelsView = hotelsView;
             _roomsView = roomsView;
