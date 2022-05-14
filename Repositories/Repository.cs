@@ -1,7 +1,7 @@
 ﻿using Database;
+using Entities;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Abstract;
-using System.Linq.Expressions;
 
 namespace Repositories
 {
@@ -24,7 +24,6 @@ namespace Repositories
 
         public void Update(TEntity entity)
         {
-            //_dbSet.Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
             _context.SaveChanges();
         }
@@ -37,28 +36,26 @@ namespace Repositories
 
         public void Remove(TEntity entity)
         {
-            if (_context.Entry(entity).State == EntityState.Detached)
-            {
-                _dbSet.Attach(entity);
-            }
+            //if (_context.Entry(entity).State == EntityState.Detached)
+            //{
+            //    _dbSet.Attach(entity);
+            //}
             _dbSet.Remove(entity);
             _context.SaveChanges();
         }
 
-        public TEntity GetById(int id)
+        public TEntity GetById(int id) /*=> _dbSet.Find(id);*/
         {
             var entity = _dbSet.Find(id);
             _context.Entry(entity).State = EntityState.Detached;
             return entity;
         }
 
-        public List<TEntity> GetAll()
+        public List<TEntity> GetAll() /*=> _dbSet.ToList();*/
         {
-            //var entities = _dbSet.ToList();
-            //foreach (var entity in entities)
-            //    _context.Entry(entity).State = EntityState.Detached;
-            //return entities;
-            return _dbSet.ToList();
+            if (typeof(TEntity) == typeof(RoomEntity))
+                return _dbSet.Include("Customer").ToList();
+            else return _dbSet.ToList();
         }
     }
 }

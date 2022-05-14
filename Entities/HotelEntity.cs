@@ -9,6 +9,6 @@
         public int NumberOfFloors { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
-        public List<RoomEntity> Rooms { get; set; } = new List<RoomEntity>();
+        public List<RoomEntity> Rooms { get; set; }
     }
 }

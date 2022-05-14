@@ -124,20 +124,25 @@
                   Grid.Row="1" Grid.Column="1"
                   Margin="0 0 10 0"
                   SelectedValuePath="Id"
-                  SelectedValue="{Binding SelectedId}"
-                  >
+                  SelectedValue="{Binding SelectedId}">
             <DataGrid.ItemContainerStyle>
                 <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
                     <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
                 </Style>
             </DataGrid.ItemContainerStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Назва готелю" Width="*" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Зірковість" Width="*" Binding="{Binding Stars}"/>
-                <DataGridTextColumn Header="Адреса" Width="*" Binding="{Binding Address}"/>
-                <DataGridTextColumn Header="Телефон" Width="*" Binding="{Binding Phone, UpdateSourceTrigger=Explicit}"/>
-                <DataGridTextColumn Header="Кількість поверхів" Width="*" Binding="{Binding NumberOfFloors}"/>
-                <DataGridTextColumn Header="Кількість номерів " Width="*" Binding="{Binding NumberOfRooms}"/>
+                <DataGridTextColumn Header="Назва готелю" Width="200" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Зірковість" Width="100" Binding="{Binding Stars}"/>
+                <DataGridTextColumn Header="Адреса" Width="*" Binding="{Binding Address}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Телефон" Width="160" Binding="{Binding Phone, UpdateSourceTrigger=Explicit}"/>
+                <DataGridTextColumn Header="Кількість поверхів" Width="150" Binding="{Binding NumberOfFloors}"/>
+                <DataGridTextColumn Header="Кількість номерів " Width="150" Binding="{Binding NumberOfRooms}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

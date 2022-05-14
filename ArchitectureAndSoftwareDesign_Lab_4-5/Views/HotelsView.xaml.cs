@@ -39,9 +39,11 @@ namespace UI.Views
         {
             if (string.IsNullOrWhiteSpace(SearchValue))
                 HotelsDataGrid.ItemsSource = _hotelsController.GetAll();
-            else HotelsDataGrid.ItemsSource = _hotelsController.GetAll().FindAll(x => x.Name.Contains(SearchValue) |
-            x.Address.Contains(SearchValue) | x.Stars.Contains(SearchValue) |
-            x.Address.Contains(SearchValue) | x.Phone.Contains(SearchValue));
+            else HotelsDataGrid.ItemsSource = _hotelsController.GetAll().
+                    FindAll(x => x.Name.ToLower().Contains(SearchValue.ToLower()) |
+            x.Address.ToLower().Contains(SearchValue.ToLower()) |
+            x.Stars.ToLower().ToLower().Contains(SearchValue.ToLower()) |
+            x.Phone.ToLower().Contains(SearchValue));
         }
 
         private void ClearFields()
@@ -105,7 +107,7 @@ namespace UI.Views
         {
             HotelModel temp = (HotelModel)HotelsDataGrid.SelectedItem;
             TextBoxHotelName.Text = temp.Name;
-            ComboBoxStars.SelectedItem = StarsValues.Find(x=> x.Selected.Contains(temp.Stars.Substring(0, 1)));
+            ComboBoxStars.SelectedItem = StarsValues.Find(x => x.Selected.Contains(temp.Stars.Substring(0, 1)));
             TextBoxFloorsNumber.Text = temp.NumberOfFloors.ToString();
             TextBoxAddress.Text = temp.Address;
             TextBoxPhone.Text = temp.Phone;

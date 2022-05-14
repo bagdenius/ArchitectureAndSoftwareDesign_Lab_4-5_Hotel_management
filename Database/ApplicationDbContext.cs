@@ -19,5 +19,21 @@ namespace Database
             optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=HotelManagementDb");
             optionsBuilder.UseLazyLoadingProxies(false);
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<HotelEntity>()
+                .HasMany(h => h.Rooms)
+                .WithOne(r => r.Hotel)
+                .HasForeignKey(r => r.HotelId);
+            modelBuilder.Entity<RoomEntity>()
+                .HasOne(r => r.Customer)
+                .WithOne(c => c.Room)
+                .HasForeignKey<CustomerEntity>(c => c.RoomId);
+            modelBuilder.Entity<CustomerEntity>()
+                .HasOne(c => c.Room)
+                .WithOne(r => r.Customer)
+                .IsRequired();
+        }
     }
 }

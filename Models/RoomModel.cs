@@ -13,38 +13,100 @@ namespace Models
         private string servicesAndAmenities;
         private string windowsView;
         private string bookingState;
-        private DateTime bookingStartDate;
-        private DateTime bookingEndDate;
+        private DateTime? bookingStartDate;
+        private DateTime? bookingEndDate;
 
         // mapped properties
         public int Id { get; set; }
+        public int? HotelId { get; set; }
+        public HotelModel Hotel { get; set; }
+        public CustomerModel Customer { get; set; }
 
-        public string Number { get; set; }
-
-        public int Floor { get; set; }
-
-        public double Cost { get; set; }
-
-        public double Area { get; set; }
-
-        public string RoomCategory { get; set; }
-        public string ServicesAndAmenities 
+        public string Number
         {
-            get;
-            set;
+            get => number;
+            set { if (number != value) { number = value; OnPropertyChanged(); } }
         }
 
-        public string WindowsView { get; set; }
+        public int? Floor
+        {
+            get => floor;
+            set { if (floor != value && value != null) { floor = (int)value; OnPropertyChanged(); } }
+        }
 
-        public string BookingState { get; set; }
+        public double Cost
+        {
+            get => cost;
+            set { if (cost != value) { cost = value; OnPropertyChanged(); } }
+        }
 
-        public DateTime? BookingStartDate { get; set; }
+        public double Area
+        {
+            get => area;
+            set { if (area != value) { area = value; OnPropertyChanged(); } }
+        }
 
-        public DateTime? BookingEndDate { get; set; }
+        public string RoomCategory
+        {
+            get => roomCategory;
+            set { if (roomCategory != value) { roomCategory = value; OnPropertyChanged(); } }
+        }
 
-        public int HotelId { get; set; }
-        public HotelModel Hotel { get; set; }
-        public int? CustomerId { get; set; }
-        public CustomerModel Customer { get; set; }
+        public string ServicesAndAmenities
+        {
+            get => servicesAndAmenities;
+            set { if (servicesAndAmenities != value) { servicesAndAmenities = value; OnPropertyChanged(); } }
+        }
+
+        public string WindowsView
+        {
+            get => windowsView;
+            set { if (windowsView != value) { windowsView = value; OnPropertyChanged(); } }
+        }
+
+        public string BookingState
+        {
+            get => bookingState;
+            set { if (bookingState != value) { bookingState = value; OnPropertyChanged(); } }
+        }
+
+        public string BookingDates
+        {
+            get => $"{bookingStartDate.Value.ToShortDateString()} - " +
+                $"{bookingEndDate.Value.ToShortDateString()}";
+        }
+
+        public DateTime? BookingStartDate
+        {
+            get
+            {
+                if (bookingStartDate != DateTime.MinValue) return bookingStartDate;
+                return null;
+            }
+            set { if (bookingStartDate != value) { bookingStartDate = value; OnPropertyChanged(); } }
+        }
+
+        public DateTime? BookingEndDate
+        {
+            get
+            {
+                if (bookingEndDate != DateTime.MinValue) return bookingEndDate;
+                return null;
+            }
+            set { if (bookingEndDate != value) { bookingEndDate = value; OnPropertyChanged(); } }
+        }
+
+        public string Info { get => ToString(); }
+
+        public override string ToString()
+        {
+            return $"Номер {Number}" +
+                $"\nТип: {RoomCategory.ToLower()}" +
+                $"\nПоверх: {Floor}-ий" +
+                $"\nЦіна: {Cost} гривень" +
+                $"\nПлоща: {Area} кв.м" +
+                $"\nВид з вікна {WindowsView.ToLower()}" +
+                $"\nСервіси та послуги: {ServicesAndAmenities.ToLower()}";
+        }
     }
 }

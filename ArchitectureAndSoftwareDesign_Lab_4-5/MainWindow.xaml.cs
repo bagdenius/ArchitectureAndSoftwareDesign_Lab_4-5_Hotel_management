@@ -51,18 +51,12 @@ namespace UI
 
         // Setting view events
         private void ButtonSetHotelsView_Click(object sender, RoutedEventArgs e)
-        {
-            ViewsContentControl.Content = _hotelsView;
-        }
+            => ViewsContentControl.Content = _hotelsView;
 
         private void ButtonSetRoomsView_Click(object sender, RoutedEventArgs e)
-        {
-            ViewsContentControl.Content = _roomsView;
-        }
+            => ViewsContentControl.Content = _roomsView;
 
         private void ButtonSetBookingsView_Click(object sender, RoutedEventArgs e)
-        {
-            ViewsContentControl.Content = _bookingView;
-        }
+            => ViewsContentControl.Content = _bookingView;
     }
 }

@@ -11,7 +11,8 @@
              xmlns:i ="using:WinRtBehaviors"
              xmlns:custom="using:WinRtExt.Behavior" 
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="690" d:DesignWidth="1280"
+             Loaded="RoomsView_Loaded">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -41,8 +42,7 @@
                  Foreground="FloralWhite"
                  Margin="20 0 0 0"
                  Width="200"
-                 Text="{Binding SearchValue}"
-                 TextChanged="SearchBox_TextChanged"
+                 Text="{Binding SearchValue, UpdateSourceTrigger=PropertyChanged}"
                  Style="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                  materialDesign:HintAssist.Hint="Пошук"/>
 
@@ -56,15 +56,17 @@
                       Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                       DisplayMemberPath="Name"
                       IsReadOnly="True"
-                      ItemsSource="{Binding Hotels}"
-                      SelectedValue="{Binding SelectedHotel, Mode=TwoWay}"/>
+                      SelectedValuePath="Id"
+                      SelectionChanged="ComboBoxHotelSelecting_SelectionChanged"
+                      SelectedValue="{Binding Room.HotelId, ValidatesOnExceptions=True , UpdateSourceTrigger=PropertyChanged}"/>
 
                 <TextBox x:Name="TextBox_RoomNumber"
                      materialDesign:HintAssist.Hint="Номер"
                      Foreground="FloralWhite"
                      Margin="10 0 10 10"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     Text="{Binding Room.Number}"/>
+                     Text="{Binding Room.Number, ValidatesOnExceptions=True , UpdateSourceTrigger=PropertyChanged}"
+                     PreviewTextInput="DigitalTextBox_PreviewTextInput"/>
 
                 <ComboBox x:Name="ComboBoxFloor" 
                       IsEditable="False"
@@ -73,22 +75,23 @@
                       Margin="10 0 10 10"
                       Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                       IsReadOnly="True"
-                      ItemsSource="{Binding FloorValues, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding Room.Floor}"/>
+                      SelectedItem="{Binding Room.Floor, ValidatesOnExceptions=True , UpdateSourceTrigger=PropertyChanged}"/>
 
                 <TextBox x:Name="TextBox_Cost"
                      materialDesign:HintAssist.Hint="Ціна"
                      Foreground="FloralWhite"
                      Margin="10 0 10 10"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     Text="{Binding Room.Cost}"/>
+                     Text="{Binding Room.Cost, ValidatesOnExceptions=True , UpdateSourceTrigger=PropertyChanged}"
+                     PreviewTextInput="DigitalTextBox_PreviewTextInput"/>
 
                 <TextBox x:Name="TextBox_Area"
                      materialDesign:HintAssist.Hint="Площа"
                      Foreground="FloralWhite"
                      Margin="10 0 10 10"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     Text="{Binding Room.Area}"/>
+                     Text="{Binding Room.Area, ValidatesOnExceptions=True , UpdateSourceTrigger=PropertyChanged}"
+                     PreviewTextInput="DigitalTextBox_PreviewTextInput"/>
 
                 <ComboBox x:Name="ComboBoxRoomCategory" 
                       IsEditable="False"
@@ -97,8 +100,7 @@
                       Margin="10 0 10 10"
                       Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                       IsReadOnly="True"
-                      ItemsSource="{Binding RoomCategoryValues}"
-                      SelectedItem="{Binding Room.RoomCategory}"/>
+                      SelectedItem="{Binding Room.RoomCategory, ValidatesOnExceptions=True , UpdateSourceTrigger=PropertyChanged}"/>
 
                 <ComboBox x:Name="ComboBoxWindowsView" 
                       IsEditable="False"
@@ -107,8 +109,7 @@
                       Margin="10 0 10 10"
                       Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                       IsReadOnly="True"
-                      ItemsSource="{Binding WindowsViewValues}"
-                      SelectedItem="{Binding Room.WindowsView}"/>
+                      SelectedItem="{Binding Room.WindowsView, ValidatesOnExceptions=True , UpdateSourceTrigger=PropertyChanged}"/>
 
                 <TextBlock Text="Оберіть додаткові послуги та зручності"
             HorizontalAlignment="Center"
@@ -121,10 +122,10 @@
 
                 <ListBox x:Name="ListBox_ServicesAndAmenities"
                          Height="Auto"
-                         ItemsSource="{Binding ServicesAndAmenitiesValues}"
                          Style="{StaticResource MaterialDesignFilterChipPrimaryListBox}"
                          SelectionMode="Multiple"
-                         SelectedItem="{Binding Room.ServicesAndAmenities}">
+                         SelectedItem="{Binding Room.ServicesAndAmenities}"
+                         SelectionChanged="ListBox_ServicesAndAmenities_SelectionChanged">
                     
                 </ListBox>
 
@@ -140,20 +141,31 @@
                   CanUserDeleteRows="False" 
                   IsReadOnly="True" 
                   SelectionUnit="FullRow"
+                  Margin="0 0 10 0"
                   Grid.Row="1" Grid.Column="1"
-                  ItemsSource="{Binding Rooms, UpdateSourceTrigger=PropertyChanged}"
                   SelectedValuePath="Id"
                   SelectedValue="{Binding SelectedId}">
+            <DataGrid.ItemContainerStyle>
+                <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                    <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
+                </Style>
+            </DataGrid.ItemContainerStyle>
+            
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Номер" Width="80" Binding="{Binding Number}"/>
                 <DataGridTextColumn Header="Поверх" Width="80" Binding="{Binding Floor}"/>
                 <DataGridTextColumn Header="Ціна" Width="80" Binding="{Binding Cost}"/>
                 <DataGridTextColumn Header="Площа " Width="80" Binding="{Binding Area}"/>
-                <DataGridTextColumn Header="Тип" Width="80" Binding="{Binding RoomCategory}"/>
-                <DataGridTextColumn Header="Послуги та зручності" Width="*" Binding="{Binding ServicesAndAmenities}"/>
+                <DataGridTextColumn Header="Тип" Width="140" Binding="{Binding RoomCategory}"/>
+                <DataGridTextColumn Header="Послуги та зручності" Width="*" Binding="{Binding ServicesAndAmenities}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="Вид з вікон" Width="120" Binding="{Binding WindowsView}"/>
-                <DataGridTextColumn Header="Стан" Width="100" Binding="{Binding BookingState}"/>
-                <DataGridTextColumn Header="Дата бронювання" Width="200" Binding="{Binding BookingStartDate}"/>
+                <DataGridTextColumn Header="Стан" Width="130" Binding="{Binding BookingState}"/>
             </DataGrid.Columns>
         </DataGrid>
 
@@ -163,18 +175,22 @@
             <Button x:Name="ButtonAddRoom"
                     Content="Додати номер"
                     Margin="2"
-                    Command="{Binding AddRoomCommand}"/>
+                    Click="ButtonAddRoom_Click"/>
 
             <Button x:Name="ButtonUpdateRoom"
                     Content="Змінити номер"
                     Margin="2"
-                    Command="{Binding UpdateRoomCommand}"/>
+                    Click="ButtonUpdateRoom_Click"/>
 
             <Button x:Name="ButtonRemoveHotel"
                     Content="Видалити номер"
                     Margin="2"
-                    Command="{Binding RemoveRoomCommand}"/>
+                    Click="ButtonRemoveRoom_Click"/>
 
+            <Button x:Name="ButtonClearFields"
+                    Content="Очистити поля"
+                    Margin="2"
+                    Click="ButtonClearFields_Click"/>
 
         </StackPanel>
 

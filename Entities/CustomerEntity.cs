@@ -1,4 +1,6 @@
-﻿namespace Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Entities
 {
     public class CustomerEntity
     {
@@ -12,6 +14,8 @@
         public DateTime BirthDate { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public List<RoomEntity> Rooms { get; set; } = new List<RoomEntity>();
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int RoomId { get; set; }
+        public RoomEntity Room { get; set; }
     }
 }

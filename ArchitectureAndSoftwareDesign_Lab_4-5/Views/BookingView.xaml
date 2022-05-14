@@ -5,8 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:UI.Views"
+             xmlns:addons="clr-namespace:UI.Static_addons"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="690" d:DesignWidth="1280"
+             Loaded="BookingView_Loaded"
+             Language="uk">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -48,63 +51,133 @@
                       Margin="10 0 10 10"
                       Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                       DisplayMemberPath="Name"
+                      SelectedValuePath="Id"
                       IsReadOnly="True"
-                      SelectedValue=""/>
+                      SelectionChanged="ComboBoxHotelSelecting_SelectionChanged"/>
 
-            <ComboBox x:Name="ComboBoxStars" 
+            <ComboBox x:Name="ComboBoxRoomSelecting" 
                       IsEditable="False"
-                      materialDesign:HintAssist.Hint="Виберіть кількість зірок"
+                      materialDesign:HintAssist.Hint="Виберіть кімнату"
                       Foreground="FloralWhite"
                       Margin="10 0 10 10"
                       Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                      SelectedValuePath="Selected"
-                      DisplayMemberPath="Display"
+                      SelectedValuePath="Id"
+                      DisplayMemberPath="Number"
+                      IsReadOnly="True"/>
+
+            <DatePicker Name="DatePickerStartBookingDate"
+                        materialDesign:HintAssist.Hint="Початкова дата бронювання"
+                        Foreground="FloralWhite"
+                        Margin="10 0 10 10"
+                        DisplayDateStart="{x:Static addons:DateHelper.BookingStart}"
+                        DisplayDateEnd="{x:Static addons:DateHelper.BookingEnd}"
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                        SelectedDateFormat="Long"/>
+
+            <DatePicker Name="DatePickerEndBookingDate"
+                        materialDesign:HintAssist.Hint="Кінцева дата бронювання"
+                        Foreground="FloralWhite"
+                        Margin="10 0 10 20"
+                        DisplayDateStart="{Binding SelectedDate, ElementName=DatePickerStartBookingDate}" 
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                        SelectedDateFormat="Long"/>
+
+            <TextBlock Text="Інформація про клієнта"
+                   Foreground="LightGray"
+                   FontSize="15"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Center"
+                   Style="{StaticResource MaterialDesignHeadline1TextBlock}"/>
+
+            <TextBox x:Name="TextBoxSurname" 
+                     materialDesign:HintAssist.Hint="Введіть ваше прізвище"
+                     Foreground="FloralWhite"
+                     Margin="10 0 10 10"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     Text="{Binding Customer.Surname, ValidatesOnExceptions=True , UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBox x:Name="TextBoxName" 
+                     materialDesign:HintAssist.Hint="Ім'я"
+                     Foreground="FloralWhite"
+                     Margin="10 0 10 10"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     Text="{Binding Customer.Name, ValidatesOnExceptions=True , UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBox x:Name="TextBoxPatronymic" 
+                     materialDesign:HintAssist.Hint="По-батькові"
+                     Foreground="FloralWhite"
+                     Margin="10 0 10 10"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     Text="{Binding Customer.Patronymic, ValidatesOnExceptions=True , UpdateSourceTrigger=PropertyChanged}"/>
+
+            <ComboBox x:Name="ComboBoxGender" 
+                      IsEditable="False"
+                      materialDesign:HintAssist.Hint="Стать"
+                      Foreground="FloralWhite"
+                      Margin="10 0 10 10"
+                      Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                       IsReadOnly="True"
-                      SelectedValue="">
-            </ComboBox>
+                      SelectedItem="{Binding Customer.Gender, ValidatesOnExceptions=True , UpdateSourceTrigger=PropertyChanged}"/>
 
-            <TextBox x:Name="TextBoxFloorsNumber" 
-                     materialDesign:HintAssist.Hint="Кількість поверхів"
+            <DatePicker Name="DatePickerBirthDate"
+                        materialDesign:HintAssist.Hint="Дата народження"
+                        Foreground="FloralWhite"
+                        Margin="10 0 10 10"
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                        SelectedDateFormat="Long"
+                        DisplayDateStart="01.01.1920"
+                        DisplayDateEnd="{x:Static addons:DateHelper.BookingStart}"
+                        SelectedDate="{Binding Customer.BirthDate, ValidatesOnExceptions=True , UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBox x:Name="TextBoxPassport" 
+                     materialDesign:HintAssist.Hint="Серія та номер паспорта"
                      Foreground="FloralWhite"
                      Margin="10 0 10 10"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     Text=""/>
-
-            <TextBox x:Name="TextBoxAddress" 
-                     materialDesign:HintAssist.Hint="Адреса готелю"
-                     Foreground="FloralWhite"
-                     Margin="10 0 10 10"
-                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     Text=""/>
+                     Text="{Binding Customer.Passport, ValidatesOnExceptions=True , UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBox x:Name="TextBoxPhone" 
-                     materialDesign:HintAssist.Hint="Телефон готелю"
+                     materialDesign:HintAssist.Hint="Номер телефону"
                      Foreground="FloralWhite"
                      Margin="10 0 10 10"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     Text=""/>
+                     Text="{Binding Customer.Phone, ValidatesOnExceptions=True , UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBox x:Name="TextBoxEmail" 
+                     materialDesign:HintAssist.Hint="E-mail"
+                     Foreground="FloralWhite"
+                     Margin="10 0 10 10"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     Text="{Binding Customer.Email, ValidatesOnExceptions=True , UpdateSourceTrigger=PropertyChanged}"/>
 
         </StackPanel>
 
         <StackPanel Orientation="Horizontal"
                     Grid.Row="2" Grid.Column="1">
 
-            <Button x:Name="ButtonAddHotel"
-                    Content="Додати готель"
-                    Margin="2"/>
+            <Button x:Name="ButtonAddBooking"
+                    Content="Забронювати кімнату"
+                    Margin="2"
+                    Click="ButtonAddBooking_Click"/>
 
-            <Button x:Name="ButtonUpdateHotel"
-                    Content="Змінити готель"
-                    Margin="2"/>
+            <Button x:Name="ButtonUpdateBooking"
+                    Content="Змінити бронювання"
+                    Margin="2"
+                    Click="ButtonUpdateBooking_Click"/>
 
-            <Button x:Name="ButtonRemoveHotel"
-                    Content="Видалити готель"
-                    Margin="2"/>
+            <Button x:Name="ButtonRemoveBooking"
+                    Content="Відмінити бронювання"
+                    Margin="2"
+                    Click="ButtonRemoveBooking_Click"/>
 
+            <Button x:Name="ButtonClearFields"
+                    Content="Очистити поля"
+                    Margin="2"
+                    Click="ButtonClearFields_Click"/>
 
         </StackPanel>
 
-        <DataGrid x:Name="RoomsDataGrid" 
+        <DataGrid x:Name="BookingsDataGrid" 
                   AutoGenerateColumns="False" 
                   CanUserResizeRows="True" 
                   SelectionMode="Single" 
@@ -115,13 +188,40 @@
                   Grid.Row="1" Grid.Column="1"
                   Margin="0 0 10 0"
                   SelectedValuePath="Id">
+            <DataGrid.ItemContainerStyle>
+            <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
+            </Style>
+            </DataGrid.ItemContainerStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Назва готелю" Width="*" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Зірковість" Width="*" Binding="{Binding Stars}"/>
-                <DataGridTextColumn Header="Адреса" Width="*" Binding="{Binding Address}"/>
-                <DataGridTextColumn Header="Телефон" Width="*" Binding="{Binding Phone}"/>
-                <DataGridTextColumn Header="Кількість поверхів" Width="*" Binding="{Binding NumberOfFloors}"/>
-                <DataGridTextColumn Header="Кількість номерів " Width="*" Binding="{Binding NumberOfRooms}"/>
+                <DataGridTextColumn Header="Готель" Width="*" Binding="{Binding Hotel}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Номер" Width="*" Binding="{Binding Info}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Гість" Width="*" Binding="{Binding Customer}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Дата бронювання" Width="180" Binding="{Binding BookingDates}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

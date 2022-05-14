@@ -20,13 +20,7 @@ namespace Models
         public string Name
         {
             get => name;
-            set
-            {
-                if (name != value)
-                {
-                    name = value; OnPropertyChanged();
-                }
-            }
+            set { if (name != value) { name = value; OnPropertyChanged(); } }
         }
 
         public string Stars
@@ -35,7 +29,11 @@ namespace Models
             set { if (stars == value) return; stars = value; OnPropertyChanged(); }
         }
 
-        public int NumberOfRooms { get; set; }
+        public int NumberOfRooms
+        {
+            get => numberOfRooms;
+            set { if (numberOfRooms != value) { numberOfRooms = value; OnPropertyChanged(); } }
+        }
 
         public int NumberOfFloors
         {
@@ -50,8 +48,8 @@ namespace Models
 
         public string Address
         {
-            get;
-            set;
+            get => address;
+            set { if (address != value) { address = value; OnPropertyChanged(); } }
         }
 
         public string Phone
@@ -59,11 +57,20 @@ namespace Models
             get => phone;
             set
             {
+                if (string.IsNullOrWhiteSpace(value)) { phone = string.Empty; return; }
                 if (!new Regex(@"^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$").IsMatch(value) || string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("Неправильний формат номера телефону!");
                 OnPropertyChanged(ref phone, value);
             }
         }
 
+        public override string ToString()
+        {
+            return $"{Stars} готель \"{Name}\"" +
+                $"\nАдреса: {Address}" +
+                $"\nТелефон: {Phone}" +
+                $"\nКількість поверхів: {NumberOfFloors}" +
+                $"\nКількість номерів: {NumberOfRooms}";
+        }
     }
 }

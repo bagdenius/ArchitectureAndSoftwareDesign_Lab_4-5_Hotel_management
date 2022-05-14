@@ -12,6 +12,7 @@
         public DateTime BirthDate { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public List<Room> Rooms { get; set; }
+        public int RoomId { get; set; }
+        public Room Room { get; set; }
     }
 }

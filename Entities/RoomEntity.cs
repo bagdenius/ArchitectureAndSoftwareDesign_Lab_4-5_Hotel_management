@@ -15,7 +15,6 @@
         public DateTime? BookingEndDate { get; set; }
         public int HotelId { get; set; }
         public HotelEntity Hotel { get; set; }
-        public int? CustomerId { get; set; }
         public CustomerEntity Customer { get; set; }
     }
 }
