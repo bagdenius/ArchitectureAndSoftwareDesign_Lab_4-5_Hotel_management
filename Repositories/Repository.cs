@@ -36,22 +36,18 @@ namespace Repositories
 
         public void Remove(TEntity entity)
         {
-            //if (_context.Entry(entity).State == EntityState.Detached)
-            //{
-            //    _dbSet.Attach(entity);
-            //}
             _dbSet.Remove(entity);
             _context.SaveChanges();
         }
 
-        public TEntity GetById(int id) /*=> _dbSet.Find(id);*/
+        public TEntity GetById(int id)
         {
             var entity = _dbSet.Find(id);
             _context.Entry(entity).State = EntityState.Detached;
             return entity;
         }
 
-        public List<TEntity> GetAll() /*=> _dbSet.ToList();*/
+        public List<TEntity> GetAll()
         {
             if (typeof(TEntity) == typeof(RoomEntity))
                 return _dbSet.Include("Customer").ToList();

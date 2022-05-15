@@ -22,7 +22,7 @@ namespace UI.Views
             _customersController = customersController;
             Customer = new CustomerModel();
             DataContext = this;
-            foreach (var gender in Enum.GetValues(typeof(Gender))) 
+            foreach (var gender in Enum.GetValues(typeof(Gender)))
                 ComboBoxGender.Items.Add(gender.ToString());
         }
 
@@ -56,16 +56,23 @@ namespace UI.Views
             if (CanAddOrUpdate())
             {
                 RoomModel Room = _roomsController.GetById((int)ComboBoxRoomSelecting.SelectedValue);
+                Room.BookingStartDate = DatePickerStartBookingDate.SelectedDate;
+                Room.BookingEndDate = DatePickerEndBookingDate.SelectedDate;
                 if (Room.BookingState == BookingState.Вільний.ToString())
                 {
-                    Room.BookingStartDate = DatePickerStartBookingDate.SelectedDate;
-                    Room.BookingEndDate = DatePickerEndBookingDate.SelectedDate;
-                    Room.BookingState = BookingState.Заброньований.ToString();
-                    Customer.Id = 0;
-                    Customer.RoomId = Room.Id;
-                    _customersController.Add(Customer);
-                    _roomsController.Update(Room);
-                    UpdateDataGrid(); ClearFields();
+                    MessageBoxResult result = Checkout.Show(Room.Hotel.Stars + " готель " +
+                        Room.Hotel.Name, Room.ToString(), Customer.ToString(),
+                        $"ДАТА БРОНЮВАННЯж {Room.BookingDates}" +
+                        $"\nСУМА ЗАМОВЛЕННЯ: {Room.Cost * ((Room.BookingEndDate - Room.BookingStartDate).Value.Days + 1)} гривень");
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        Room.BookingState = BookingState.Заброньований.ToString();
+                        Customer.Id = 0;
+                        Customer.RoomId = Room.Id;
+                        _customersController.Add(Customer);
+                        _roomsController.Update(Room);
+                        UpdateDataGrid(); ClearFields();
+                    }
                 }
                 else MessageBox.Show("Обрана кімната вже заброньована або здається!", "Повідомлення", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
@@ -76,18 +83,25 @@ namespace UI.Views
             if (CanAddOrUpdate())
             {
                 RoomModel Room = _roomsController.GetById((int)ComboBoxRoomSelecting.SelectedValue);
+                Room.BookingStartDate = DatePickerStartBookingDate.SelectedDate;
+                Room.BookingEndDate = DatePickerEndBookingDate.SelectedDate;
                 if (Room.BookingState == BookingState.Заброньований.ToString())
                 {
-                    Room.BookingStartDate = DatePickerStartBookingDate.SelectedDate;
-                    Room.BookingEndDate = DatePickerEndBookingDate.SelectedDate;
-                    Room.BookingState = BookingState.Заброньований.ToString();
-                    _roomsController.Update(Room);
-                    Customer.Id = (BookingsDataGrid.SelectedItem as RoomModel).Customer.Id;
-                    if (Customer.Id == 0)
-                        Customer.Id = _roomsController.GetById(Room.Id).Customer.Id;
-                    Customer.RoomId = Room.Id;
-                    _customersController.Update(Customer);
-                    UpdateDataGrid(); ClearFields();
+                    MessageBoxResult result = Checkout.Show(Room.Hotel.Stars + " готель " +
+                        Room.Hotel.Name, Room.ToString(), Customer.ToString(),
+                        $"ДАТА БРОНЮВАННЯж {Room.BookingDates}" +
+                        $"\nСУМА ЗАМОВЛЕННЯ: {Room.Cost * ((Room.BookingEndDate - Room.BookingStartDate).Value.Days + 1)} гривень");
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        Room.BookingState = BookingState.Заброньований.ToString();
+                        _roomsController.Update(Room);
+                        Customer.Id = (BookingsDataGrid.SelectedItem as RoomModel).Customer.Id;
+                        if (Customer.Id == 0)
+                            Customer.Id = _roomsController.GetById(Room.Id).Customer.Id;
+                        Customer.RoomId = Room.Id;
+                        _customersController.Update(Customer);
+                        UpdateDataGrid(); ClearFields();
+                    }  
                 }
             }
         }

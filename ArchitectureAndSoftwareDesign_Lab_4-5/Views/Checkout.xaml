@@ -1,0 +1,55 @@
+﻿<Window x:Class="UI.Views.Checkout"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UI.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Checkout" Height="500" Width="400"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        AllowsTransparency="True">
+
+    <Border Background="#345678"
+            CornerRadius="10">
+        <Border.Style>
+            <Style>
+                <Setter Property="materialDesign:ThemeAssist.Theme" Value="Dark"/>
+            </Style>
+        </Border.Style>
+        <Grid>
+            <StackPanel Orientation="Vertical">
+                <TextBlock x:Name="TextBlockCheckout"
+                           Margin="20 20 20 0"
+                           Foreground="FloralWhite"
+                           FontSize="14"
+                           TextWrapping="Wrap"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" 
+                        VerticalAlignment="Bottom">
+                
+                <Button x:Name="ButtonYes"
+                        Content="Оплатити"
+                        Margin="60 0 32 10"
+                        Width="100"
+                        Foreground="#345678"
+                        Style="{StaticResource MaterialDesignFlatLightBgButton}"
+                        Click="ButtonYes_Click"/>
+                
+                <Button x:Name="ButtonCancel"
+                        Content="Відмінити"
+                        Width="100"
+                        Style="{StaticResource MaterialDesignOutlinedLightButton}"
+                        Margin="45 0 0 10"
+                        Click="ButtonCancel_Click"/>
+            </StackPanel>
+        </Grid>
+        
+        
+
+    </Border>
+</Window>
