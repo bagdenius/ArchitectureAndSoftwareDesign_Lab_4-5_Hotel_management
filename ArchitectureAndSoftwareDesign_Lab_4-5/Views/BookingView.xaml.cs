@@ -101,7 +101,7 @@ namespace UI.Views
                         Customer.RoomId = Room.Id;
                         _customersController.Update(Customer);
                         UpdateDataGrid(); ClearFields();
-                    }  
+                    }
                 }
             }
         }
@@ -114,7 +114,9 @@ namespace UI.Views
                 Room.BookingStartDate = null;
                 Room.BookingEndDate = null;
                 Room.BookingState = BookingState.Вільний.ToString();
-                _customersController.Remove(Room.Customer.Id);
+                if (Room.Customer != null)
+                    _customersController.Remove(Room.Customer.Id);
+                else _customersController.Remove((BookingsDataGrid.SelectedItem as RoomModel).Customer.Id);
                 Room.Customer = null;
                 _roomsController.Update(Room);
                 UpdateDataGrid();
