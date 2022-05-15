@@ -89,7 +89,7 @@ namespace UI.Views
                 {
                     MessageBoxResult result = Checkout.Show(Room.Hotel.Stars + " готель " +
                         Room.Hotel.Name, Room.ToString(), Customer.ToString(),
-                        $"ДАТА БРОНЮВАННЯж {Room.BookingDates}" +
+                        $"ДАТА БРОНЮВАННЯ: {Room.BookingDates}" +
                         $"\nСУМА ЗАМОВЛЕННЯ: {Room.Cost * ((Room.BookingEndDate - Room.BookingStartDate).Value.Days + 1)} гривень");
                     if (result == MessageBoxResult.Yes)
                     {
