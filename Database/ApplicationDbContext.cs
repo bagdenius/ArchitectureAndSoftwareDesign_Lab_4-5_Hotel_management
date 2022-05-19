@@ -9,7 +9,7 @@ namespace Database
         public ApplicationDbContext()
         {
             //Database.EnsureDeleted();
-            Database.EnsureCreated();
+            Database.EnsureCreated();   
         }
         public DbSet<HotelEntity> Hotels { get; set; }
         public DbSet<RoomEntity> Rooms { get; set; }
